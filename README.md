@@ -1,6 +1,6 @@
 # File Manager(open to edit)
 
-a dockerized micro-service for adding, updating, retrieving and deleting files
+A dockerized micro-service for adding, updating, retrieving and deleting files
 
 ### Quick Start
 
@@ -27,7 +27,8 @@ a dockerized micro-service for adding, updating, retrieving and deleting files
 ```
 {
     "status": true,
-    "message": "File Uploaded"
+    "message": "File Uploaded",
+    "data": null
 }
 ```
 
@@ -43,7 +44,7 @@ a dockerized micro-service for adding, updating, retrieving and deleting files
 {
     "status": true,
     "message": "Files Found",
-    "files": [
+    "data": [
         {
             "id": "5e6288bc8c7fec6308a1d499",
             "file": "s3://falcon-bucket/files/mark.png"
@@ -80,7 +81,7 @@ a dockerized micro-service for adding, updating, retrieving and deleting files
 {
     "status": true,
     "message": "File Found",
-    "file": {
+    "data": {
         "id": "5e6288bc8c7fec6308a1d499",
         "file": "s3://falcon-bucket/files/mark.png"
     }
@@ -109,7 +110,8 @@ a dockerized micro-service for adding, updating, retrieving and deleting files
 ```
 {
     "status": true,
-    "message": "File Updated"
+    "message": "File Updated",
+    "data": null
 }
 ```
 
@@ -134,7 +136,8 @@ a dockerized micro-service for adding, updating, retrieving and deleting files
 ```
 {
     "status": true,
-    "message": "File Deleted"
+    "message": "File Deleted",
+    "data": null
 }
 ```
 
