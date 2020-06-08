@@ -12,7 +12,7 @@ a dockerized micro-service for adding, updating, retrieving and deleting files
 
 * Method - POST
 
-* URL - http://localhost:3000/api/v1/files/file/upload
+* URL - http://localhost:3000/api/v1/files/
 
 * Sample Request
 
@@ -35,7 +35,7 @@ a dockerized micro-service for adding, updating, retrieving and deleting files
 
 * Method - GET
 
-* URL - http://localhost:3000/api/v1/files/file/uploads
+* URL - http://localhost:3000/api/v1/files/
 
 * Sample Response
 
@@ -72,7 +72,7 @@ a dockerized micro-service for adding, updating, retrieving and deleting files
 
 * Method - GET
 
-* URL - http://localhost:3000/api/v1/files/file/uploads/:id
+* URL - http://localhost:3000/api/v1/files/:fileId
 
 * Sample Response
 
@@ -91,7 +91,7 @@ a dockerized micro-service for adding, updating, retrieving and deleting files
 
 * Method - PUT
 
-* URL - http://localhost:3000/api/v1/files/file/:id/update
+* URL - http://localhost:3000/api/v1/files/:fileId
 
 * HEADER
 
@@ -117,7 +117,7 @@ a dockerized micro-service for adding, updating, retrieving and deleting files
 
 * Method - DELETE
 
-* URL - http://localhost:3000/api/v1/files/file/:id/delete
+* URL - http://localhost:3000/api/v1/files/:fileId
 
 * HEADER
 
