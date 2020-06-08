@@ -22,6 +22,7 @@ class FileContoller {
 
       res.status(200).json(response("All Files Found", file, true))
     })
+
   }
 
   //route handler to get all files
