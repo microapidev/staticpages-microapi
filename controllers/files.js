@@ -1,10 +1,10 @@
-const fileModel = require('../models/file.model');
-
-
+const File = require("../models/file.model");
+const response = require("../utils/response")
+const CustomError = require("../utils/CustomError")
 
 /**
  * Controllers for :
- * 
+ *
  * getFiles
  * getFile,
  * createFile,
@@ -14,8 +14,8 @@ const fileModel = require('../models/file.model');
 
 class FileContoller {
     async getFile(req, res) {
-        const { _id } = req.params;
-        const fileInfo = await fileModel.findOne({ id }, (err, info) => {
+        const { fileId } = req.params;
+        const fileInfo = await File.findOne({ id }, (err, info) => {
             if (err) return res.json({ message: 'there is an error in retrieving the file' }).status(400);
             res.json({
                 data: info,
@@ -24,6 +24,32 @@ class FileContoller {
         })
     }
 
+  //route hancler to get all files
+  getFiles(req, res) {
+    let files = Files.find();
+    files.then((result) => {
+      res.status(200).json({
+        status: "true",
+        message: "Files Found",
+        data: result,
+      });
+    });
+  }
+
+  deleteFile(req, res) {
+    File.deleteOne({ _id: req.params.fileId })
+      .then(() => {
+        res.status(200).json({
+          status: true,
+          message: "File Deleted",
+        });
+      })
+      .catch((error) => {
+        res.status(400).json({
+          status: error,
+        });
+      });
+  }
 }
 
 module.exports = new FileContoller();
