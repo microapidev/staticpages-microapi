@@ -10,11 +10,11 @@ const {
 const router = express.Router();
 
 
-router.post("/", createFile);
-router.get("/", getFiles);
+// router.post("/", createFile);
+// router.get("/", getFiles);
 router.get("/:fileId", getFile);
-router.put("/:fileId", updateFile);
-router.delete("/:fileId", deleteFile);
+// router.put("/:fileId", updateFile);
+// router.delete("/:fileId", deleteFile);
 
 
 module.exports = router;
