@@ -1,4 +1,5 @@
 const File = require("../models/file.model");
+
 /**
  * Controllers for :
  *
@@ -9,19 +10,25 @@ const File = require("../models/file.model");
  * deleteFile
  */
 class FileContoller {
-  deleteFile(req, res) {
-    File.deleteOne({ _id: req.params.id })
-      .then(() => {
-        res.status(200).json({
-          status: true,
-          message: "File Deleted",
-        });
-      })
-      .catch((error) => {
-        res.status(400).json({
-          status: error,
-        });
+  //route hancler to get all files
+  getFiles(req, res) {
+    let files = Files.find();
+    files.then((result) => {
+      res.status(200).json({
+        status: true,
+        message: "Files Found",
+        data: result,
       });
+    });
+  }
+
+  deleteFile(req, res) {
+    File.deleteOne({ _id: req.params.id }).then(() => {
+      res.status(200).json({
+        status: true,
+        message: "File Deleted",
+      });
+    });
   }
 }
 
