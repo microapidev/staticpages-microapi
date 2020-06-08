@@ -23,5 +23,10 @@ app.use((req, res, next) => {
 app.use(errorMiddleware);
 
 // Listen to port
-app.listen(port, () => `Server now running on ${port}`)
+app.listen(port, () => {
+     console.log(`::: Server listening on port ${port}`);
+});
 
+app.on('error', (error) => {
+     console.log("::> An error occiurred in our server " + error);
+});

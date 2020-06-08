@@ -1,4 +1,4 @@
-const CustomError = require("./CustomError");
+const CustomError = require("../utils/CustomError");
 const response = require("../utils/response")
 
 const errors = (error, req, res, next) => {
