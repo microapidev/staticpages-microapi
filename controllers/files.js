@@ -1,5 +1,6 @@
 
 const File = require("../models/file.model");
+const response = require("../utils/response")
 
 /**
  * Controllers for :
@@ -21,21 +22,24 @@ class FileContoller {
         data: result,
       });
     });
-    
-  deleteFile(req, res) {
-    File.deleteOne({ _id: req.params.id })
-      .then(() => {
-        res.status(200).json({
-          status: true,
-          message: "File Deleted",
+
+    deleteFile(req, res) {
+      File.deleteOne({ _id: req.params.id })
+        .then(() => {
+          res.status(200).json({
+            status: true,
+            message: "File Deleted",
+          });
+        })
+        .catch((error) => {
+          res.status(400).json({
+            status: error,
+          });
         });
-      })
-      .catch((error) => {
-        res.status(400).json({
-          status: error,
-        });
-      });
+    }
   }
+
+
 }
 
 module.exports = new FileContoller();
