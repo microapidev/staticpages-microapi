@@ -1,7 +1,4 @@
 /**
- * 
- * 
- * 
  * @param {string} message 
  * Response message
  * 

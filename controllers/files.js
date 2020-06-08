@@ -1,6 +1,7 @@
 
 const File = require("../models/file.model");
 const response = require("../utils/response")
+const CustomError = require("../utils/CustomError")
 
 /**
  * Controllers for :
@@ -11,6 +12,7 @@ const response = require("../utils/response")
  * updateFile,
  * deleteFile
  */
+
 class FileContoller {
   //route hancler to get all files
   getFiles(req, res) {
@@ -22,24 +24,22 @@ class FileContoller {
         data: result,
       });
     });
-
-    deleteFile(req, res) {
-      File.deleteOne({ _id: req.params.id })
-        .then(() => {
-          res.status(200).json({
-            status: true,
-            message: "File Deleted",
-          });
-        })
-        .catch((error) => {
-          res.status(400).json({
-            status: error,
-          });
-        });
-    }
   }
 
-
+  deleteFile(req, res) {
+    File.deleteOne({ _id: req.params.id })
+      .then(() => {
+        res.status(200).json({
+          status: true,
+          message: "File Deleted",
+        });
+      })
+      .catch((error) => {
+        res.status(400).json({
+          status: error,
+        });
+      });
+  }
 }
 
 module.exports = new FileContoller();
