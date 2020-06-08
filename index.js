@@ -8,7 +8,7 @@ const fileRoutes = require("./routes/files")
 const errorMiddleware = require("./middleware/error")
 
 app.use(cors())
-app.use(express.urlencoded({extended:true}));
+app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
 
 //Api routes
@@ -22,5 +22,6 @@ app.use((req, res, next) => {
 // Handle server erros
 app.use(errorMiddleware);
 
+// Listen to port
+app.listen(port, () => `Server now running on ${port}`)
 
-app.listen(port, ()=> `Server now running on ${port}`)
