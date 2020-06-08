@@ -1,6 +1,6 @@
-const File = require("../models/file.model");
-const response = require("../utils/response");
-const CustomError = require("../utils/CustomError");
+const File = require("./../models/file.model");
+const response = require("./../utils/response");
+const CustomError = require("./../utils/CustomError");
 
 /**
  * Controllers for :
