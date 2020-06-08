@@ -1,5 +1,5 @@
-const CustomError = require("../utils/CustomError");
-const response = require("../utils/response")
+const CustomError = require("./../utils/CustomError");
+const response = require("./../utils/response")
 
 const errors = (error, req, res, next) => {
      if (error instanceof CustomError) {
