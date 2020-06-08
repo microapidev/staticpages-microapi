@@ -21,7 +21,8 @@ class FileContoller {
         data: result,
       });
     });
-    
+  }
+   
   deleteFile(req, res) {
     File.deleteOne({ _id: req.params.id })
       .then(() => {
