@@ -41,8 +41,8 @@ class FileContoller {
     });
   }
 
-  deleteFile(req, res) {
-    File.deleteOne({ _id: req.params.id }).then(() => {
+  async deleteFile(req, res) {
+    await File.deleteOne({ _id: req.params.id }).then(() => {
       res.status(200).json({
         status: true,
         message: "File Deleted",
