@@ -13,34 +13,28 @@ const CustomError = require("../utils/CustomError");
  */
 
 class FileContoller {
+  // Get one file
   async getFile(req, res) {
-    const { fileId } = req.params;
-    const fileInfo = await File.findOne({ id }, (err, info) => {
-      if (err)
-        return res
-          .json({ message: "there is an error in retrieving the file" })
-          .status(400);
-      res
-        .json({
-          data: info,
-          message: "The file is successfully retrieved",
-        })
-        .status(200);
-    });
+    await File.findOne({ _id: req.params.fileId }, (err, file) => {
+      if (err) throw new CustomError("Error occured while retriving files");
+
+      if (!file) return res.status(404).json(response("File Not Found", null, false))
+
+      res.status(200).json(response("All Files Found", file, true))
+    })
+
   }
 
-  //route hancler to get all files
-  getFiles(req, res) {
-    let files = Files.find();
-    files.then((result) => {
-      res.status(200).json({
-        status: true,
-        message: "Files Found",
-        data: result,
-      });
-    });
+  //route handler to get all files
+  async getFiles(req, res) {
+    let files = await File.find();
+
+    if (!files) return res.status(200).json(response("No Files Found", files, true))
+
+    return res.status(200).json(response("All Files Found", files, true))
   }
 
+  // Delete one file
   deleteFile(req, res) {
     File.deleteOne({ _id: req.params.id }).then(() => {
       res.status(200).json({

@@ -9,7 +9,7 @@
  * Request status success
  * 
  * Usage in the controller
- * res.status(200).send(response("File added successfuly", {file: "file.png"}, true))
+ * res.status(200).json(response("File added successfuly", {file: "file.png"}, true))
  */
 
 const response = (message, data, success) => {
