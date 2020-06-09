@@ -5,7 +5,7 @@ const app = express();
 const morgan = require("morgan");
 const path = require("path");
 
-const port = process.env.PORT;
+const port = process.env.PORT || 3000;
 const fileRoutes = require("./routes/files");
 const errorMiddleware = require("./middleware/error");
 const initDB = require("./config/db");
@@ -36,3 +36,5 @@ app.listen(port, () => {
 app.on("error", (error) => {
   console.log("::> An error occiurred in our server " + error);
 });
+
+module.exports = app;
