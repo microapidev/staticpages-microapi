@@ -54,6 +54,19 @@ class FileContoller {
       res.status(200).json(response("File Deleted", null, true));
     });
   }
+
+  async updateFile(req,res) {
+    const file = await File.findByIdAndUpdate(
+        {_id: req.params.id}, {title:req.body.title, file:req.file}, {overwrite: true}, (err,file) => {
+        if(err) throw new CustomError("Error: File could not be updated");
+
+        if(!file)
+        return res.status(404).json(response("File with ID not found", null, false));
+
+        res.status(200).json(response("File updated successfully", null, true));
+    })
+  }
+  
 }
 
 module.exports = new FileContoller();
