@@ -15,6 +15,7 @@ const CustomError = require("./../utils/CustomError");
 class FileContoller {
   // Add file
   async createFile(req,res){
+    // Add file path to request body
     if (req.file) req.body["fileURL"] = req.file.path
 
     let file = new File(req.body)
@@ -45,6 +46,7 @@ class FileContoller {
     return res.status(200).json(response("All Files Found", files, true));
   }
 
+  
   async deleteFile(req, res) {
     const file = await File.deleteOne({ _id: req.params.id }, (err, file) => {
       if (err) throw new CustomError("Error occured while deleting file");
@@ -55,18 +57,24 @@ class FileContoller {
     });
   }
 
+
   async updateFile(req,res) {
-    const file = await File.findByIdAndUpdate(
-        {_id: req.params.id}, {title:req.body.title, file:req.file}, {overwrite: true}, (err,file) => {
-        if(err) throw new CustomError("Error: File could not be updated");
+    // Add file path to request body
+    if (req.file) req.body["fileURL"] = req.file.path
 
-        if(!file)
-        return res.status(404).json(response("File with ID not found", null, false));
+    const file = await File.findOneAndUpdate(
+        {_id: req.params.fileId}, 
+        req.body, 
+        {new: true}, 
+        (err,file) => {
+          if(err) throw new CustomError("Error: File could not be updated");
 
-        res.status(200).json(response("File updated successfully", null, true));
-    })
+          if(!file)
+          return res.status(404).json(response("File with ID not found", null, false));
+
+          res.status(200).json(response("File updated successfully", file, true));
+      })
   }
-  
 }
 
 module.exports = new FileContoller();
