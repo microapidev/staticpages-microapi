@@ -55,16 +55,15 @@ class FileContoller {
     });
   }
 
-  async updateFile(req, res, next) {
-    await   File.findOneAndUpdate(
-        {_id:req.params.fileId} 
-        ,req.body,
-        {new:true},
-        (err,file)=>{
-                if (err) throw new CustomError("Error occured while updating the file");
-                 res.status(200).json(response("file updated", file, true)); 
-        });
-      }
+  async deleteFile(req, res,next) {
+    const file = await File.deleteOne({ _id: req.params.id }, (err, file) => {
+      if (err) throw new CustomError("Error occured while deleting file");
+      if (!file)
+        return res.status(404).json(response("File Not Found", null, false));
+
+      res.status(200).json(response("File Deleted", null, true));
+    });
+  }
 }
 
 module.exports = new FileContoller();
