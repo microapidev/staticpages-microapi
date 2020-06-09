@@ -54,6 +54,17 @@ class FileContoller {
       res.status(200).json(response("File Deleted", null, true));
     });
   }
+
+  async updateFile(req, res, next) {
+    await   File.findOneAndUpdate(
+        {_id:req.params.fileId} 
+        ,req.body,
+        {new:true},
+        (err,file)=>{
+                if (err) throw new CustomError("Error occured while updating the file");
+                 res.status(200).json(response("file updated", file, true)); 
+        });
+      }
 }
 
 module.exports = new FileContoller();
