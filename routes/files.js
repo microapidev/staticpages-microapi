@@ -13,7 +13,7 @@ const {
 router.post("/", upload.single("file"), createFile);
 router.get("/", getFiles);
 router.get("/:fileId", getFile);
-// router.put("/:fileId", updateFile);
+router.put("/:fileId", updateFile);
 router.delete("/:fileId", deleteFile);
 
 module.exports = router;
