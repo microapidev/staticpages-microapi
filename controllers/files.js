@@ -14,8 +14,9 @@ const fs = require("fs");
 
 class FileContoller {
   // Add file
-  async createFile(req, res) {
-    if (req.file) req.body["fileURL"] = req.file.path;
+  async createFile(req,res){
+    // Add file path to request body
+    if (req.file) req.body["fileURL"] = req.file.path
 
     let file = new File(req.body);
     file.save();
@@ -45,6 +46,7 @@ class FileContoller {
     return res.status(200).json(response("All Files Found", files, true));
   }
 
+  
   async deleteFile(req, res) {
     await File.findOne({ _id: req.params.fileId }, (err, file) => {
       const filename = file.fileURL.split("uploads/")[1];
@@ -60,6 +62,25 @@ class FileContoller {
         });
       });
     });
+  }
+
+
+  async updateFile(req,res) {
+    // Add file path to request body
+    if (req.file) req.body["fileURL"] = req.file.path
+
+    const file = await File.findOneAndUpdate(
+        {_id: req.params.fileId}, 
+        req.body, 
+        {new: true}, 
+        (err,file) => {
+          if(err) throw new CustomError("Error: File could not be updated");
+
+          if(!file)
+          return res.status(404).json(response("File with ID not found", null, false));
+
+          res.status(200).json(response("File updated successfully", file, true));
+      })
   }
 }
 
