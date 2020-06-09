@@ -1,6 +1,6 @@
-const express = require('express');
+const express = require("express");
 const router = express.Router();
-const upload = require("./../config/multerConfig")
+const upload = require("./../config/multerConfig");
 const {
   getFiles,
   getFile,
@@ -9,8 +9,7 @@ const {
   deleteFile,
 } = require("./../controllers/files");
 
-
-router.post("/", upload.single("file"), createFile);
+router.post("/", upload, createFile);
 router.get("/", getFiles);
 router.get("/:fileId", getFile);
 router.put("/:fileId", updateFile);

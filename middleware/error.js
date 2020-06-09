@@ -1,5 +1,5 @@
 const CustomError = require("./../utils/CustomError");
-const response = require("./../utils/response")
+const response = require("./../utils/response");
 
 const errors = (error, req, res, next) => {
      if (error instanceof CustomError) {
@@ -13,4 +13,4 @@ const errors = (error, req, res, next) => {
      }
 }
 
-module.exports = errors
+module.exports = errors;

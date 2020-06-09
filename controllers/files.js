@@ -1,10 +1,10 @@
 const File = require("./../models/file.model");
 const response = require("./../utils/response");
 const CustomError = require("./../utils/CustomError");
-
+const fs = require("fs");
 /**
  * Controllers for :
- * 
+ *
  * getFiles
  * getFile,
  * createFile,
@@ -18,10 +18,10 @@ class FileContoller {
     // Add file path to request body
     if (req.file) req.body["fileURL"] = req.file.path
 
-    let file = new File(req.body)
-    file.save()
+    let file = new File(req.body);
+    file.save();
 
-    res.status(201).json(response("File created", file, true))
+    res.status(201).json(response("File created", file, true));
   }
 
   // Get one file
@@ -32,8 +32,8 @@ class FileContoller {
       if (!file)
         return res.status(404).json(response("File Not Found", null, false));
 
-      res.status(200).json(response("File Found", file, true))
-    })
+      res.status(200).json(response("File Found", file, true));
+    });
   }
 
   //route handler to get all files
@@ -48,12 +48,19 @@ class FileContoller {
 
   
   async deleteFile(req, res) {
-    const file = await File.deleteOne({ _id: req.params.id }, (err, file) => {
-      if (err) throw new CustomError("Error occured while deleting file");
-      if (!file)
-        return res.status(404).json(response("File Not Found", null, false));
+    await File.findOne({ _id: req.params.fileId }, (err, file) => {
+      const filename = file.fileURL.split("uploads/")[1];
+      fs.unlink(`uploads/${filename}`, async () => {
+        await File.deleteOne({ _id: req.params.id }, (err, file) => {
+          if (err) throw new CustomError("Error occured while deleting file");
+          if (!file)
+            return res
+              .status(404)
+              .json(response("File Not Found", null, false));
 
-      res.status(200).json(response("File Deleted", null, true));
+          res.status(200).json(response("File Deleted", null, true));
+        });
+      });
     });
   }
 
