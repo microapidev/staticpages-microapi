@@ -12,7 +12,7 @@ const {
 router.post("/", upload, createFile);
 router.get("/", getFiles);
 router.get("/:fileId", getFile);
-router.put("/:fileId", updateFile);
+router.put("/:fileId", upload, updateFile);
 router.delete("/:fileId", deleteFile);
 
 module.exports = router;
