@@ -6,6 +6,7 @@ const options = {
   useCreateIndex: true,
   useUnifiedTopology: true,
   useFindAndModify: false,
+  connectTimeoutMS: 10000,
 };
 
 function initializeDB() {
