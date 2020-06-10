@@ -5,6 +5,7 @@
   "main": "index.js",
   "scripts": {
     "start": "node -r dotenv/config index.js",
+    "dev": "nodemon -r dotenv/config index.js",
     "test": "export NODE_ENV=test || SET \"NODE_ENV=test\" && nyc mocha"
   },
   "repository": {
