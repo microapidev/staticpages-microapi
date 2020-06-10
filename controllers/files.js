@@ -13,11 +13,11 @@ const fs = require("fs");
  */
 
 class FileContoller {
+
   // Add file
   async createFile(req, res) {
     // Add file path to request body
-    if (req.file) req.body["fileURL"] = req.file.path;
-
+    if (req.file.path) req.body["fileURL"] = req.file.path;
     let file = new File(req.body);
     file.save();
 
@@ -26,75 +26,51 @@ class FileContoller {
 
   // Get one file
   async getFile(req, res) {
-    await File.findOne({ _id: req.params.fileId }, (err, file) => {
-      if (err) throw new CustomError("Error occured while retriving files");
+    const file = await File.findOne({ _id: req.params.fileId })
+    if (!file) throw new CustomError("File Not Found", 404);
 
-      if (!file)
-        return res.status(404).json(response("File Not Found", null, false));
-
-      res.status(200).json(response("File Found", file, true));
-    });
+    res.status(200).json(response("File Found", file, true));
   }
 
-  //route handler to get all files
+  //Get all files
   async getFiles(req, res) {
-    let files = await File.find({});
+    const files = await File.find({});
+    if (!files) res.status(200).json(response("No Files Found", files, true));
 
-    if (!files)
-      return res.status(200).json(response("No Files Found", files, true));
-
-    return res.status(200).json(response("All Files Found", files, true));
+    res.status(200).json(response("All Files Found", files, true));
   }
 
+  // Delete one file
   async deleteFile(req, res) {
-    await File.findOne({ _id: req.params.fileId }, (err, file) => {
-      const filename = file.fileURL.split("uploads/")[1];
-      fs.unlink(`uploads/${filename}`, async () => {
-        await File.deleteOne({ _id: req.params.id }, (err, file) => {
-          if (err) throw new CustomError("Error occured while deleting file");
-          if (!file)
-            return res
-              .status(404)
-              .json(response("File Not Found", null, false));
+    const file = await File.findOneAndDelete({ _id: req.params.fileId })
+    if (!file) throw new CustomError("File Not Found", 404);
+    const filename = file.fileURL.split("uploads\\")[1];
+    fs.unlinkSync(`uploads/${filename}`)
 
-          res.status(200).json(response("File Deleted", null, true));
-        });
-      });
-    });
-  }
+    res.status(200).json(response("File Deleted", file, true));
+  };
 
+  // Update one file
   async updateFile(req, res) {
     // Add file path to request body
-    if (req.file) req.body["fileURL"] = req.file.path;
+    if (req.file.path) req.body["fileURL"] = req.file.path;
 
-    await File.findOne({ _id: req.params.fileId }, (err, file) => {
-      const filename = file.fileURL.split("uploads/")[1];
-      fs.unlink(`uploads/${filename}`, async () => {
-        await File.findOneAndUpdate(
-          {
-            _id: req.params.fileId,
-          },
-          req.body,
-          { new: true },
-          (err, file) => {
-            if (err) throw new CustomError("Error: File could not be updated");
+    const file = await File.findOne({ _id: req.params.fileId })
+    if (!file) throw new CustomError("File Not Found", 404);
 
-            if (!file)
-              return res
-                .status(404)
-                .json(response("File with ID not found", null, false));
+    const updatedFile = await File.findOneAndUpdate(
+      { _id: req.params.fileId },
+      { "$set": req.body },
+      { new: true }
+    )
 
-            res
-              .status(200)
-              .json(response("File updated successfully", file, true));
-          }
-        );
-      });
-      if (err) throw new CustomError("Error occured while retriving files");
+    // Delete old file is another was added 
+    if (req.file.path) {
+      const filename = file.fileURL.split("uploads\\")[1];
+      fs.unlinkSync(`uploads/${filename}`)
+    }
 
-      if (!file)
-        return res.status(404).json(response("File Not Found", null, false));
-    });
+    res.status(200).json(response("File updated successfully", updatedFile, true));
   }
 }
 
