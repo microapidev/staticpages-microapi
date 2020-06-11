@@ -71,7 +71,6 @@ class FileContoller {
   // Delte one file
   async deleteFile(req, res) {
     const file = await File.findOne({ _id: req.params.fileId })
-
     if (!file) throw new CustomError("File Not Found", 404);
 
     const filename = file.fileURL.split("uploads/")[1];
