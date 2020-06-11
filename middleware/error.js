@@ -2,6 +2,7 @@ const CustomError = require("./../utils/CustomError");
 const response = require("./../utils/response");
 
 const errors = (error, req, res, next) => {
+  console.log(error.message)
   if (error instanceof CustomError) {
     res.status(error.status).json(response(error.message, null, false));
   } else if (error.name == "ValidationError") {
