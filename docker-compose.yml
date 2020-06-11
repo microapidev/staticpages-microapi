@@ -1,0 +1,12 @@
+version: "3"
+services:
+     mean:
+          build: .
+          links:
+               - db
+          ports:
+               - "5550:5550"
+     db:
+          image: mongo
+          ports:
+               - "5555:5555"
