@@ -12,6 +12,7 @@ const fileRoutes = require("./routes/files");
 const userRoutes = require("./routes/users");
 const errorMiddleware = require("./middleware/error");
 const initDB = require("./config/db");
+const auth = require("./middleware/auth")
 
 app.use(cors());
 app.use(morgan("dev"));
@@ -20,7 +21,7 @@ app.use(express.json());
 app.use("/uploads", express.static(path.join(__dirname, "./uploads/")));
 
 //Api routes
-app.use("/api/v1/files", fileRoutes);
+app.use("/api/v1/files", auth(), fileRoutes);
 app.use("/api/v1/users", userRoutes);
 
 // Home page
