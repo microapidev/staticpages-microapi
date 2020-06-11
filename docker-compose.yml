@@ -12,13 +12,13 @@ services:
     environment:
       - MONGO_URI=$MONGO_URI
     ports:
-      - "5555:27017"
+      - "5555:5517"
     volumes:
       - .:/home/node/app
       - node_modules:/home/node/app/node_modules
     networks:
       - app-network
-    command: ./wait-for.sh db:27017 -- /home/node/app/node_modules/.bin/nodemon index.js
+    command: ./wait-for.sh db:5517 -- /home/node/app/node_modules/.bin/nodemon index.js
   db:
     image: mongo:4.1.8-xenial
     container_name: db
