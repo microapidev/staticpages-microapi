@@ -108,7 +108,7 @@ class FileContoller {
         const filename = file.fileURL.split("uploads/")[1];
         fs.unlink(`uploads/${filename}`, async () => {
           const file = await File.deleteOne(
-            { _id: req.params.id },
+            { _id: req.params.fileId },
             (err, file) => {
               if (err)
                 throw new CustomError("Error occured while deleting file");
