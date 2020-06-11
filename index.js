@@ -5,7 +5,7 @@ const app = express();
 const morgan = require("morgan");
 const path = require("path");
 
-const port = process.env.PORT || 5550;
+const port = process.env.PORT || 5555;
 const fileRoutes = require("./routes/files");
 const errorMiddleware = require("./middleware/error");
 const initDB = require("./config/db");
@@ -18,6 +18,11 @@ app.use("/uploads", express.static(path.join(__dirname, "./uploads/")));
 
 //Api routes
 app.use("/api/v1/files", fileRoutes);
+
+// Home page
+app.get('/', function (req, res) {
+  res.status(200).sendFile(path.join(__dirname, './index.html'));
+});
 
 //Handle invalid api endpoints
 app.use((req, res, next) => {
