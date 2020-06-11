@@ -25,9 +25,7 @@ app.use("/uploads", express.static(path.join(__dirname, "./uploads/")));
 app.use("/api/v1/files", fileRoutes);
 
 // Home page
-app.get('/', function (req, res) {
-  res.status(200).sendFile(path.join(__dirname, './index.html'));
-});
+app.use('/', swaggerUi.serve, swaggerUi.setup(swaggerDocument));
 
 //Handle invalid api endpoints
 app.use((req, res, next) => {
