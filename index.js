@@ -19,6 +19,11 @@ app.use("/uploads", express.static(path.join(__dirname, "./uploads/")));
 //Api routes
 app.use("/api/v1/files", fileRoutes);
 
+// Home page
+app.get('/', function (req, res) {
+  res.status(200).sendFile(path.join(__dirname, './index.html'));
+});
+
 //Handle invalid api endpoints
 app.use((req, res, next) => {
   throw new CustomError("Invalid request", 400);
