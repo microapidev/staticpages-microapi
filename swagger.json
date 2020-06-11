@@ -24,7 +24,7 @@
     "http"
   ],
   "paths": {
-    "/api/v1/files": {
+    "/v1/files": {
       "post": {
         "tags": [
           "file"
@@ -89,7 +89,7 @@
         }
       }
     },
-    "/api/v1/files/{fileId}": {
+    "/v1/files/{fileId}": {
       "get": {
         "tags": [
           "file"
