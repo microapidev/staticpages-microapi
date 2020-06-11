@@ -5,7 +5,7 @@ const app = express();
 const morgan = require("morgan");
 const path = require("path");
 
-const port = process.env.PORT || 3000;
+const port = process.env.PORT || 5550;
 const fileRoutes = require("./routes/files");
 const errorMiddleware = require("./middleware/error");
 const initDB = require("./config/db");
