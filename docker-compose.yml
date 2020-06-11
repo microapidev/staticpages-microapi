@@ -21,6 +21,7 @@ services:
     command: ./wait-for.sh db:5517 -- /home/node/app/node_modules/.bin/nodemon index.js
   db:
     image: mongo:4.1.8-xenial
+    command: mongod --port 5517
     container_name: db
     restart: unless-stopped
     env_file: .env
