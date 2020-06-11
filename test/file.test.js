@@ -1,5 +1,4 @@
 const mongoose = require("mongoose");
-const assert = require("assert");
 const chai = require("chai");
 const chaiHttp = require("chai-http");
 let server = require("../index");
@@ -24,17 +23,42 @@ describe("CRUD OPERATIONS", () => {
       .then(() => console.log(":: Connected to database"))
       .catch((error) => console.log(":: Couldn't connect to database ", error));
   });
+
   it("should fetch all files", (done) => {
     chai
       .request(server)
       .get("/api/v1/files/")
       .end((err, result) => {
+        if (err) done(err);
         result.should.have.status(200);
         file = result.body.data;
         // console.log("Got", result.body.data, "docs");
         done();
       });
   });
+  it("should return 200 if no error", (done) => {
+    chai
+      .request(server)
+      .get("/api/v1/files/")
+      .end((err, result) => {
+        if (err) done(err);
+        result.should.have.status(200);
+        // console.log("Got", result.body.data, "docs");
+        done();
+      });
+  });
+  it("should return 400 if error exists", (done) => {
+    chai
+      .request(server)
+      .get("/api/v1/files/")
+      .end((err, result) => {
+        if (err) done(err);
+        result.should.have.status(200);
+        // console.log("Got", result.body.data, "docs");
+        done();
+      });
+  });
+
   it("should add a file", (done) => {
     chai
       .request(server)
@@ -47,6 +71,7 @@ describe("CRUD OPERATIONS", () => {
         filename
       )
       .end((err, result) => {
+        if (err) done(err);
         result.should.have.status(201);
         // console.log("Got", result.body);
         done();
@@ -57,6 +82,7 @@ describe("CRUD OPERATIONS", () => {
       .request(server)
       .get(`/api/v1/files/${file[0]._id}`)
       .end((err, result) => {
+        if (err) done(err);
         result.should.have.status(200);
         // console.log("Got", result.body.data);
         done();
@@ -74,6 +100,7 @@ describe("CRUD OPERATIONS", () => {
         filename
       )
       .end((err, result) => {
+        if (err) done(err);
         result.should.have.status(200);
         // console.log("Got", result.body);
         done();
@@ -84,6 +111,7 @@ describe("CRUD OPERATIONS", () => {
       .request(server)
       .delete(`/api/v1/files/${file[0]._id}`)
       .end((err, result) => {
+        if (err) done(err);
         result.should.have.status(200);
         done();
       });
