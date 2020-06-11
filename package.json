@@ -4,7 +4,7 @@
   "description": "file storage microservices",
   "main": "index.js",
   "scripts": {
-    "start": "node -r dotenv/config index.js",
+    "start": "node index.js",
     "dev": "nodemon -r dotenv/config index.js",
     "test": "export NODE_ENV=test || SET \"NODE_ENV=test\" && nyc mocha"
   },
