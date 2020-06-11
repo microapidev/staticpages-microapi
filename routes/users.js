@@ -5,6 +5,6 @@ const {
     signUp
 } = require("./../controllers/users");
 
-router.post("/api/v1/user/signup", signUp);
+router.post("/signup", signUp);
 
 module.exports = router;
