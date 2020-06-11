@@ -1,10 +1,12 @@
 const File = require("./../models/file.model");
 const response = require("./../utils/response");
 const CustomError = require("./../utils/CustomError");
+const fs = require("fs");
+const validate = require("./../utils/validate");
 
 /**
  * Controllers for :
- * 
+ *
  * getFiles
  * getFile,
  * createFile,
