@@ -4,6 +4,8 @@ const cors = require("cors");
 const app = express();
 const morgan = require("morgan");
 const path = require("path");
+const swaggerUi = require("swagger-ui-express");
+const swaggerDocument = require("./swagger.json");
 
 const port = process.env.PORT || 5555;
 const fileRoutes = require("./routes/files");
@@ -15,6 +17,9 @@ app.use(morgan("dev"));
 app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
 app.use("/uploads", express.static(path.join(__dirname, "./uploads/")));
+
+// Documenetation route
+app.use("/api/v1", swaggerUi.serve, swaggerUi.setup(swaggerDocument));
 
 //Api routes
 app.use("/api/v1/files", fileRoutes);
@@ -38,7 +43,7 @@ app.listen(port, () => {
   initDB();
 });
 
-app.on("error", (error) => {
+app.on("error", error => {
   console.log("::> An error occurred in our server " + error);
 });
 
