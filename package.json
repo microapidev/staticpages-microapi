@@ -5,7 +5,8 @@
   "main": "index.js",
   "scripts": {
     "start": "node -r dotenv/config index.js",
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "dev": "nodemon -r dotenv/config index.js",
+    "test": "export NODE_ENV=test || SET \"NODE_ENV=test\" && mocha"
   },
   "repository": {
     "type": "git",
@@ -28,6 +29,11 @@
     "shortid": "^2.2.15"
   },
   "devDependencies": {
-    "nodemon": "^1.19.4"
+    "nodemon": "^1.19.4",
+    "chai": "^4.2.0",
+    "chai-http": "^4.3.0",
+    "mocha": "^7.2.0",
+    "nyc": "^15.1.0",
+    "supertest": "^4.0.2"
   }
 }

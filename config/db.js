@@ -5,13 +5,14 @@ const options = {
   useNewUrlParser: true,
   useCreateIndex: true,
   useUnifiedTopology: true,
-  useFindAndModify: false
+  useFindAndModify: false,
 };
 
 function initializeDB() {
-  mongoose.connect(uri, options)
-    .then(() => console.log(':: Connected to database'))
-    .catch(error => console.log(":: Couldn't connect to database ", error));
-};
+  mongoose
+    .connect(uri, options)
+    .then(() => console.log(":: Connected to database"))
+    .catch((error) => console.log(":: Couldn't connect to database ", error));
+}
 
-module.exports = initializeDB
+module.exports = initializeDB;
