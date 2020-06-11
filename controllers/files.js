@@ -15,6 +15,7 @@ const validate = require("./../utils/validate");
  */
 
 class FileContoller {
+
   // Add file
   async createFile(req, res) {
     if (req.body && req.file) {
