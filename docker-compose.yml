@@ -6,7 +6,7 @@ services:
       context: .
       dockerfile: Dockerfile
     image: nodejs
-    container_name: nodejs
+    container_name: falcon-nodejs
     restart: unless-stopped
     env_file: .env
     environment:
@@ -18,11 +18,11 @@ services:
       - node_modules:/home/node/app/node_modules
     networks:
       - app-network
-    command: ./wait-for.sh db:5517 -- /home/node/app/node_modules/.bin/nodemon index.js
+    command: ./wait-for.sh falcon-db:5517 -- /home/node/app/node_modules/.bin/nodemon index.js
   db:
     image: mongo:4.1.8-xenial
     command: mongod --port 5517
-    container_name: db
+    container_name: falcon-db
     restart: unless-stopped
     env_file: .env
     environment:
