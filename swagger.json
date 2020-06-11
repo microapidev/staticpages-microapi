@@ -19,16 +19,25 @@
       "description": "Everything about file manager"
     }
   ],
-  "schemes": ["https", "http"],
+  "schemes": [
+    "https",
+    "http"
+  ],
   "paths": {
-    "/files": {
+    "/api/v1/files": {
       "post": {
-        "tags": ["file"],
+        "tags": [
+          "file"
+        ],
         "summary": "Upload a new file",
         "description": "",
         "operationId": "uploadFile",
-        "consumes": ["multipart/form-data"],
-        "produces": ["application/json"],
+        "consumes": [
+          "multipart/form-data"
+        ],
+        "produces": [
+          "application/json"
+        ],
         "parameters": [
           {
             "in": "formData",
@@ -55,11 +64,15 @@
         }
       },
       "get": {
-        "tags": ["file"],
+        "tags": [
+          "file"
+        ],
         "summary": "Get all files",
         "description": "",
         "operationId": "updateFile",
-        "produces": ["application/json"],
+        "produces": [
+          "application/json"
+        ],
         "responses": {
           "200": {
             "description": "successful operation",
@@ -76,13 +89,17 @@
         }
       }
     },
-    "/files/{fileId}": {
+    "/api/v1/files/{fileId}": {
       "get": {
-        "tags": ["file"],
+        "tags": [
+          "file"
+        ],
         "summary": "Find file by ID",
         "description": "Returns a single file",
         "operationId": "getFileById",
-        "produces": ["application/json"],
+        "produces": [
+          "application/json"
+        ],
         "parameters": [
           {
             "name": "fileId",
@@ -108,12 +125,18 @@
         }
       },
       "put": {
-        "tags": ["file"],
+        "tags": [
+          "file"
+        ],
         "summary": "Updates a file",
         "description": "",
         "operationId": "updateFileWithForm",
-        "consumes": ["multipart/form-data"],
-        "produces": ["application/json"],
+        "consumes": [
+          "multipart/form-data"
+        ],
+        "produces": [
+          "application/json"
+        ],
         "parameters": [
           {
             "name": "fileId",
@@ -153,11 +176,15 @@
         }
       },
       "delete": {
-        "tags": ["file"],
+        "tags": [
+          "file"
+        ],
         "summary": "Deletes a file",
         "description": "",
         "operationId": "deleteFile",
-        "produces": ["application/json"],
+        "produces": [
+          "application/json"
+        ],
         "parameters": [
           {
             "name": "fileId",
@@ -187,7 +214,10 @@
   "definitions": {
     "File": {
       "type": "object",
-      "required": ["name", "url"],
+      "required": [
+        "name",
+        "url"
+      ],
       "properties": {
         "id": {
           "type": "string"
@@ -201,7 +231,8 @@
           "example": "https://cloudinary.com/doggie.png"
         },
         "time": {
-          "type": "string"
+          "type": "string",
+          "format": "date"
         }
       },
       "xml": {
@@ -224,6 +255,6 @@
       }
     }
   },
-  "host": "virtserver.swaggerhub.com",
-  "basePath": "/ismailah28/file-manager/1.0.0"
+  "host": "file.microapi.dev",
+  "basePath": "/"
 }
