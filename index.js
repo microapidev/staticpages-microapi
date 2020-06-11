@@ -6,14 +6,6 @@ const morgan = require("morgan");
 const path = require("path");
 const swaggerUi = require("swagger-ui-express");
 const swaggerDocument = require("./swagger.json");
-// const mongoose = require('mongoose');
-
-// const dotenv = require('dotenv');
-// dotenv.config();
-// const db = process.env.DATABASE_URI
-// mongoose.connect(db, { useNewUrlParser: true, useUnifiedTopology: true })
-//   .then(() => console.log('Database is connected'))
-//   .catch((err) => console.log(err));
 
 const port = process.env.PORT || 5555;
 const fileRoutes = require("./routes/files");
@@ -27,12 +19,9 @@ app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
 app.use("/uploads", express.static(path.join(__dirname, "./uploads/")));
 
-// Documenetation route
-// app.use("/api/v1", swaggerUi.serve, swaggerUi.setup(swaggerDocument));
-
 //Api routes
 app.use("/api/v1/files", fileRoutes);
-app.use("/", userRoutes);
+app.use("/api/v1/users", userRoutes);
 
 // Home page
 app.get('/', function (req, res) {
