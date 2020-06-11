@@ -30,7 +30,7 @@ services:
     volumes:  
       - dbdata:/data/db 
     ports:
-      - "5517:27017"
+      - "5517:5517"
     networks:
       - app-network  
 
