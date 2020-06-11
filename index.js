@@ -18,9 +18,6 @@ app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
 app.use("/uploads", express.static(path.join(__dirname, "./uploads/")));
 
-// Documenetation route
-// app.use("/api/v1", swaggerUi.serve, swaggerUi.setup(swaggerDocument));
-
 //Api routes
 app.use("/api/v1/files", fileRoutes);
 
