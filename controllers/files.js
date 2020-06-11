@@ -70,27 +70,7 @@ class FileContoller {
 
   // Delte one file
   async deleteFile(req, res) {
-    const file = await File.findOne({ _id: req.params.fileId }, (err, file) => {
-      if (file) {
-        const filename = file.fileURL.split("uploads/")[1];
-        fs.unlink(`uploads/${filename}`, async () => {
-          const file = await File.deleteOne(
-            { _id: req.params.fileId },
-            (err, file) => {
-              if (err)
-                throw new CustomError("Error occured while deleting file");
-              if (!file)
-                return res
-                  .status(404)
-                  .json(response("File Not Found", null, false));
-
-              res.status(200).json(response("File Deleted", null, true));
-            }
-          );
-          if (!file) throw new CustomError("File Not Found", 404);
-        });
-      }
-    });
+    const file = await File.findOne({ _id: req.params.fileId })
     if (!file) throw new CustomError("File Not Found", 404);
 
     const filename = file.fileURL.split("uploads/")[1];
