@@ -25,7 +25,7 @@ app.use("/api/v1", swaggerUi.serve, swaggerUi.setup(swaggerDocument));
 app.use("/api/v1/files", fileRoutes);
 
 // Home page
-app.get('/', swaggerUi.serve, swaggerUi.setup(swaggerDocument));
+app.use('/', swaggerUi.serve, swaggerUi.setup(swaggerDocument));
 
 //Handle invalid api endpoints
 app.use((req, res, next) => {
