@@ -45,7 +45,7 @@ class FileContoller {
   //Get all files
   async getFiles(req, res) {
     const files = await File.find({});
-    if (!files) res.status(200).json(response("No Files Found", files, true));
+    if (files && files.length < 1) res.status(200).json(response("No Files Found", files, true));
 
     res.status(200).json(response("All Files Found", files, true));
   }
