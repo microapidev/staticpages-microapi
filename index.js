@@ -9,6 +9,7 @@ const swaggerDocument = require("./swagger.json");
 
 const port = process.env.PORT || 5555;
 const fileRoutes = require("./routes/files");
+const userRoutes = require("./routes/users");
 const errorMiddleware = require("./middleware/error");
 const initDB = require("./config/db");
 
@@ -20,6 +21,7 @@ app.use("/uploads", express.static(path.join(__dirname, "./uploads/")));
 
 //Api routes
 app.use("/api/v1/files", fileRoutes);
+app.use("/api/v1/users", userRoutes);
 
 // Home page
 app.use('/', swaggerUi.serve, swaggerUi.setup(swaggerDocument));
