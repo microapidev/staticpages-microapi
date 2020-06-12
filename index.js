@@ -27,10 +27,10 @@ app.use("/v1/users", userRoutes);
 app.get("/v1/documentation", (req, res) => {
   res.json(swaggerDocument);
 });
-app.use("/v1/configure", updateConfig);
+app.use("/v1/configure", authorize(), updateConfig);
 
 // Home page
-app.use('/', swaggerUi.serve, swaggerUi.setup(swaggerDocument));
+app.use("/", swaggerUi.serve, swaggerUi.setup(swaggerDocument));
 
 //Handle invalid api endpoints
 app.use((req, res, next) => {
@@ -46,7 +46,7 @@ app.listen(port, () => {
   initDB();
 });
 
-app.on("error", error => {
+app.on("error", (error) => {
   console.log("::> An error occurred in our server " + error);
 });
 
