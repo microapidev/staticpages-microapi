@@ -27,7 +27,7 @@ app.use("/v1/users", userRoutes);
 app.get("/v1/documentation", (req, res) => {
   res.json(swaggerDocument);
 });
-app.use("/v1/configure", authorize(), updateConfig);
+app.post("/v1/configure", authorize(), updateConfig);
 
 // Home page
 app.use("/", swaggerUi.serve, swaggerUi.setup(swaggerDocument));

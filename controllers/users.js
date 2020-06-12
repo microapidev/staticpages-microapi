@@ -96,6 +96,7 @@ class UserContoller {
     }
 
     async updateConfig(req, res) {
+        console.log(req.body)
         const user = await User.findByIdAndUpdate({
             _id: req.user._id
         }, {
@@ -108,7 +109,7 @@ class UserContoller {
 
         if (!user) throw new CustomError("user dosen't exist", 404);
 
-        res.status(200).send(response("All Files Found", user.config, true, req));
+        res.status(200).send(response("Configuration updated", user.config, true, req, res));
     }
 
     validateLogin(req) {
