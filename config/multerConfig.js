@@ -7,20 +7,20 @@ const storage = multer.diskStorage({
     cb(null, "uploads");
   },
   filename: async (req, file, cb) => {
-    const fileExt = file.originalname.split(".").pop()
+    const fileExt = file.originalname.split(".").pop();
     let filename = `${await getFileName(req)}.${fileExt}`;
     cb(null, filename);
-  },
+  }, 
 });
 
-
 async function getFileName(req) {
+  if (!req.user.config.titleAsName) return new Date().getTime();
 
   if (!req.user.config.titleAsName) return (new Date().getTime())
 
   if (await File.findOne({ title: req.body.title, userId: req.user.email })) throw new CustomError("File title already exist")
 
-  return title.split(" ").join("-")
+  return req.body.title.split(" ").join("-");
 }
 
 module.exports = multer({
