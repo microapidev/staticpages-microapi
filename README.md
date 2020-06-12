@@ -27,17 +27,17 @@ npm run test
 
 | Routes&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; | Description                                                        |
 | -------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------ |
-| POST :: /v1/files                                                | Create a file                         |
-| GET :: /v1/files                                                 | Get all files                         |
-| GET :: /v1/files/:fileId                                         | Get a file                            |
-| UPDATE :: /v1/files/::fileId                                     | Update a file                         |
-| DELETE :: /v1/files/:fileId                                      | Delete a file                         |
+| POST  ::  /v1/files                                            | Create a file                         |
+| GET   ::  /v1/files                                            | Get all files                         |
+| GET   ::  /v1/files/:fileId                                    | Get a file                            |
+| UPDATE::  /v1/files/::fileId                                   | Update a file                         |
+| DELETE::  /v1/files/:fileId                                    | Delete a file                         |
 
 #### Create a File
 
 * Method - POST
 
-* URL - http://localhost:5555/api/v1/files
+* URL - http://localhost:5555/v1/files
 
 * Sample Request
 
@@ -62,7 +62,7 @@ Body: form-data
 
 * Method - GET
 
-* URL - http://localhost:5555/api/v1/files
+* URL - http://localhost:5555/v1/files
 
 * Sample Response
 
@@ -99,7 +99,7 @@ Body: form-data
 
 * Method - GET
 
-* URL - http://localhost:5555/api/v1/files/:fileId
+* URL - http://localhost:5555/v1/files/:fileId
 
 * Sample Response
 
@@ -118,7 +118,7 @@ Body: form-data
 
 * Method - PUT
 
-* URL - http://localhost:5555/api/v1/files/:fileId
+* URL - http://localhost:5555/v1/files/:fileId
 
 * Sample Request
 

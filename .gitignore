@@ -71,6 +71,7 @@ typings/
 # dotenv environment variables file
 
 .env.test
+.env
 
 # parcel-bundler cache (https://parceljs.org/)
 .cache
@@ -105,6 +106,7 @@ dist
 
 lindex.js
 
+uploads/
 # exclude everything
 uploads/*
 

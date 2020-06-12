@@ -1,11 +1,11 @@
-const mongoose = require("mongoose");
-const uri = process.env.MONGODB_URI;
+const mongoose = require('mongoose');
+const uri = process.env.MONGO_URI 
 
 const options = {
   useNewUrlParser: true,
   useCreateIndex: true,
   useUnifiedTopology: true,
-  useFindAndModify: false,
+  useFindAndModify: false
 };
 
 function initializeDB() {
