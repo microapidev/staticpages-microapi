@@ -15,20 +15,178 @@
   },
   "tags": [
     {
+      "name": "user",
+      "description": "Everything about user and authentication"
+    },
+    {
       "name": "file",
       "description": "Everything about file manager"
+    },
+    {
+      "name": "configure",
+      "description": "Configuring user preferences"
     }
   ],
-  "schemes": ["https", "http"],
+  "schemes": [
+    "https",
+    "http"
+  ],
   "paths": {
-    "/files": {
+    "/v1/configure": {
       "post": {
-        "tags": ["file"],
+        "tags": [
+          "configure"
+        ],
+        "summary": "Configure response",
+        "description": "",
+        "operationId": "configureResponse",
+        "consumes": [
+          "multipart/form-data"
+        ],
+        "produces": [
+          "application/json",
+          "application/xml"
+        ],
+        "parameters": [
+          {
+            "in": "formData",
+            "name": "responseType",
+            "type": "string",
+            "required": true,
+            "description": "Response type"
+          },
+          {
+            "in": "formData",
+            "name": "fullURL",
+            "type": "boolean",
+            "required": true
+          },
+          {
+            "in": "formData",
+            "name": "titleAsName",
+            "type": "boolean",
+            "required": true
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "successful operation",
+            "schema": {
+              "$ref": "#/definitions/Configure"
+            }
+          }
+        },
+        "security": [
+          {
+            "Bearer": []
+          }
+        ]
+      }
+    },
+    "/v1/users/signup": {
+      "post": {
+        "tags": [
+          "user"
+        ],
+        "summary": "Sign up",
+        "description": "",
+        "operationId": "userSignup",
+        "consumes": [
+          "application/x-www-form-urlencoded"
+        ],
+        "produces": [
+          "application/json",
+          "application/xml"
+        ],
+        "parameters": [
+          {
+            "in": "formData",
+            "name": "fullName",
+            "type": "string",
+            "required": true,
+            "description": "Full name of user"
+          },
+          {
+            "in": "formData",
+            "name": "email",
+            "type": "string",
+            "description": "Email address of user",
+            "required": true
+          },
+          {
+            "in": "formData",
+            "name": "password",
+            "type": "string",
+            "description": "Password of user",
+            "required": true
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "successful operation",
+            "schema": {
+              "$ref": "#/definitions/UserResponse"
+            }
+          }
+        }
+      }
+    },
+    "/v1/users/auth": {
+      "post": {
+        "tags": [
+          "user"
+        ],
+        "summary": "Authenticate user",
+        "description": "",
+        "operationId": "userAuth",
+        "consumes": [
+          "application/x-www-form-urlencoded"
+        ],
+        "produces": [
+          "application/json",
+          "application/xml"
+        ],
+        "parameters": [
+          {
+            "in": "formData",
+            "name": "email",
+            "type": "string",
+            "description": "Email address of user",
+            "required": true
+          },
+          {
+            "in": "formData",
+            "name": "password",
+            "type": "string",
+            "description": "Password of user",
+            "required": true
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "successful operation",
+            "schema": {
+              "$ref": "#/definitions/UserResponse"
+            }
+          }
+        }
+      }
+    },
+    "/v1/files": {
+      "post": {
+        "tags": [
+          "file"
+        ],
         "summary": "Upload a new file",
         "description": "",
         "operationId": "uploadFile",
-        "consumes": ["multipart/form-data"],
-        "produces": ["application/json"],
+        "consumes": [
+          "multipart/form-data"
+        ],
+        "produces": [
+          "application/json",
+          "application/xml"
+        ],
         "parameters": [
           {
             "in": "formData",
@@ -52,14 +210,24 @@
               "$ref": "#/definitions/ApiResponse"
             }
           }
-        }
+        },
+        "security": [
+          {
+            "Bearer": []
+          }
+        ]
       },
       "get": {
-        "tags": ["file"],
+        "tags": [
+          "file"
+        ],
         "summary": "Get all files",
         "description": "",
         "operationId": "updateFile",
-        "produces": ["application/json"],
+        "produces": [
+          "application/json",
+          "application/xml"
+        ],
         "responses": {
           "200": {
             "description": "successful operation",
@@ -67,22 +235,36 @@
               "type": "array",
               "items": {
                 "$ref": "#/definitions/File"
+              },
+              "xml": {
+                "name": "files",
+                "wrapped": true
               }
             }
           },
           "400": {
             "description": "Invalid status value"
           }
-        }
+        },
+        "security": [
+          {
+            "Bearer": []
+          }
+        ]
       }
     },
-    "/files/{fileId}": {
+    "/v1/files/{fileId}": {
       "get": {
-        "tags": ["file"],
+        "tags": [
+          "file"
+        ],
         "summary": "Find file by ID",
         "description": "Returns a single file",
         "operationId": "getFileById",
-        "produces": ["application/json"],
+        "produces": [
+          "application/json",
+          "application/xml"
+        ],
         "parameters": [
           {
             "name": "fileId",
@@ -105,15 +287,27 @@
           "404": {
             "description": "File not found"
           }
-        }
+        },
+        "security": [
+          {
+            "Bearer": []
+          }
+        ]
       },
       "put": {
-        "tags": ["file"],
+        "tags": [
+          "file"
+        ],
         "summary": "Updates a file",
         "description": "",
         "operationId": "updateFileWithForm",
-        "consumes": ["multipart/form-data"],
-        "produces": ["application/json"],
+        "consumes": [
+          "multipart/form-data"
+        ],
+        "produces": [
+          "application/json",
+          "application/xml"
+        ],
         "parameters": [
           {
             "name": "fileId",
@@ -150,14 +344,24 @@
           "404": {
             "description": "File not found"
           }
-        }
+        },
+        "security": [
+          {
+            "Bearer": []
+          }
+        ]
       },
       "delete": {
-        "tags": ["file"],
+        "tags": [
+          "file"
+        ],
         "summary": "Deletes a file",
         "description": "",
         "operationId": "deleteFile",
-        "produces": ["application/json"],
+        "produces": [
+          "application/json",
+          "application/xml"
+        ],
         "parameters": [
           {
             "name": "fileId",
@@ -180,14 +384,29 @@
           "404": {
             "description": "File not found"
           }
-        }
+        },
+        "security": [
+          {
+            "Bearer": []
+          }
+        ]
       }
+    }
+  },
+  "securityDefinitions": {
+    "Bearer": {
+      "type": "apiKey",
+      "name": "Authorization",
+      "in": "header"
     }
   },
   "definitions": {
     "File": {
       "type": "object",
-      "required": ["name", "url"],
+      "required": [
+        "name",
+        "url"
+      ],
       "properties": {
         "id": {
           "type": "string"
@@ -201,7 +420,8 @@
           "example": "https://cloudinary.com/doggie.png"
         },
         "time": {
-          "type": "string"
+          "type": "string",
+          "format": "date"
         }
       },
       "xml": {
@@ -222,8 +442,46 @@
           "type": "string"
         }
       }
+    },
+    "UserResponse": {
+      "type": "object",
+      "properties": {
+        "uid": {
+          "type": "string",
+          "example": "28937837gyu82746hfg76"
+        },
+        "fullName": {
+          "type": "string"
+        },
+        "email": {
+          "type": "string"
+        },
+        "token": {
+          "type": "string"
+        }
+      }
+    },
+    "Configure": {
+      "type": "object",
+      "required": [
+        "responseType",
+        "fullURL",
+        "titleAsName"
+      ],
+      "properties": {
+        "responseType": {
+          "type": "string",
+          "example": "JSON or XML"
+        },
+        "fullURL": {
+          "type": "boolean"
+        },
+        "titleAsName": {
+          "type": "boolean"
+        }
+      }
     }
   },
-  "host": "virtserver.swaggerhub.com",
-  "basePath": "/ismailah28/file-manager/1.0.0"
+  "host": "file.microapi.dev",
+  "basePath": "/"
 }
