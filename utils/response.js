@@ -20,10 +20,9 @@ const response = (message, data, success, req, res) => {
     data: data || null,
     success: success == null ? true : success,
   };
-  if (req)
-    if (req.user.config.responseType == "XML") {
-      return toXML(res, resp);
-    }
+  if (req && req.user.config.responseType == "XML") {
+    return toXML(res, resp);
+  }
 
   return resp;
 };
