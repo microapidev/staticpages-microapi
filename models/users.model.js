@@ -1,4 +1,7 @@
 const mongoose = require('mongoose');
+const Joi = require("@hapi/joi")
+
+
 
 //define database schema & model for posts
 const configSchema = new mongoose.Schema({
