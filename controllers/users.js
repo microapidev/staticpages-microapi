@@ -39,7 +39,7 @@ class UserContoller {
             email: user.email,
         }
 
-        res.status(201).json(response("User created", data, true, req))
+        res.status(201).json(response("User created", data, true))
     }
 
 
@@ -61,7 +61,7 @@ class UserContoller {
             token
         };
 
-        res.status(200).json(response("User", data, true, req))
+        res.status(200).json(response("User", data, true))
     }
 
     async updateConfig(req, res) {
