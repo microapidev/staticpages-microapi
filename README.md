@@ -1,25 +1,51 @@
-# File Manager(open to edit)
+# file-manager (TEAM-FALCON-Backend)
 
-A dockerized micro-service for adding, updating, retrieving and deleting files
+> A dockerized micro-service for adding, updating, retrieving and deleting files
 
 ### Quick Start
+
+```bash
+# Install dependencies
+npm i
+
+# Install dev-dependencies
+npm i -D
+
+# Serve on localhost:5555 (development)
+npm run dev
+
+# Serve on localhost:5555 (production)
+npm start
+
+# Test Routes
+npm run test
+```
 
 ### Testing
 
 ### Files
 
+| Routes&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; | Description                                                        |
+| -------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------ |
+| POST :: /v1/files                                                | Create a file                         |
+| GET :: /v1/files                                                 | Get all files                         |
+| GET :: /v1/files/:fileId                                         | Get a file                            |
+| UPDATE :: /v1/files/::fileId                                     | Update a file                         |
+| DELETE :: /v1/files/:fileId                                      | Delete a file                         |
+
 #### Create a File
 
 * Method - POST
 
-* URL - http://localhost:3000/api/v1/files/
+* URL - http://localhost:5555/api/v1/files
 
 * Sample Request
 
 ```
-{
-    "file": "mark.png"
-}
+Headers 
+Body: form-data
+    Key - file(file)
+    Value - select file
 ```
 
 * Sample Response
@@ -36,7 +62,7 @@ A dockerized micro-service for adding, updating, retrieving and deleting files
 
 * Method - GET
 
-* URL - http://localhost:3000/api/v1/files/
+* URL - http://localhost:5555/api/v1/files
 
 * Sample Response
 
@@ -47,23 +73,23 @@ A dockerized micro-service for adding, updating, retrieving and deleting files
     "data": [
         {
             "id": "5e6288bc8c7fec6308a1d499",
-            "file": "s3://falcon-bucket/files/mark.png"
+            "file": "https://res.cloudinary.com/major-stark/image/upload/v1591884570/files/mark.png"
         },
         {
             "id": "5e6288bc8c7fec6308a1d498",
-            "file": "s3://falcon-bucket/files/essien.gif"
+            "file": "https://res.cloudinary.com/major-stark/image/upload/v1591884570/files/essien.jpeg"
         },
         {
             "id": "5e6288bc8c7fec6308a1d497",
-            "file": "s3://falcon-bucket/files/seyi.jpg"
+            "file": "https://res.cloudinary.com/major-stark/image/upload/v1591884570/files/saucecode.svg"
         },
         {
             "id": "5e6288bc8c7fec6308a1d496",
-            "file": "s3://falcon-bucket/files/john.gif"
+            "file": "https://res.cloudinary.com/major-stark/image/upload/v1591884570/files/hng.mp4"
         },
         {
             "id": "5e6288bc8c7fec6308a1d495",
-            "file": "s3://falcon-bucket/files/doe.jpeg"
+            "file": "https://res.cloudinary.com/major-stark/image/upload/v1591884570/files/doe.gif"
         }
     ]
 }
@@ -73,7 +99,7 @@ A dockerized micro-service for adding, updating, retrieving and deleting files
 
 * Method - GET
 
-* URL - http://localhost:3000/api/v1/files/:fileId
+* URL - http://localhost:5555/api/v1/files/:fileId
 
 * Sample Response
 
@@ -83,7 +109,7 @@ A dockerized micro-service for adding, updating, retrieving and deleting files
     "message": "File Found",
     "data": {
         "id": "5e6288bc8c7fec6308a1d499",
-        "file": "s3://falcon-bucket/files/mark.png"
+        "file": "https://res.cloudinary.com/major-stark/image/upload/v1591884570/files/mark.png"
     }
 }
 ```
@@ -92,17 +118,15 @@ A dockerized micro-service for adding, updating, retrieving and deleting files
 
 * Method - PUT
 
-* URL - http://localhost:3000/api/v1/files/:fileId
-
-* HEADER
+* URL - http://localhost:5555/api/v1/files/:fileId
 
 * Sample Request
 
 ```
-{
-    "id": "5e6288bc8c7fec6308a1d499",
-    "file": "s3://falcon-bucket/files/mark.png"
-}
+Headers 
+Body: form-data
+    Key - file(file)
+    Value - select file
 ```
 
 * Sample Response
@@ -119,17 +143,7 @@ A dockerized micro-service for adding, updating, retrieving and deleting files
 
 * Method - DELETE
 
-* URL - http://localhost:3000/api/v1/files/:fileId
-
-* HEADER
-
-* Sample Request
-
-```
-{
-    "id": "5e6288bc8c7fec6308a1d499"
-}
-```
+* URL - http://localhost:5555/api/v1/files/:fileId
 
 * Sample Response
 
@@ -141,28 +155,91 @@ A dockerized micro-service for adding, updating, retrieving and deleting files
 }
 ```
 
-#### Search a File
+### Testing
 
-#### Get all Files - Paging
+### Users
+
+| Routes&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; | Description                                                        |
+| -------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------ |
+| POST :: /v1/users/signup                                         | User Signup                                |
+| POST :: /v1/users/auth                                           | User Login                                 |
+
+#### User Signup
+
+* Method - POST
+
+* URL - http://localhost:5555/api/v1/users/signup
+
+* Sample Request
+
+```
+{
+  "fullName": "Eark Mssien",
+  "email": "eark.mssien@hng.com",
+  "password": "EarkMssien@20Covid"
+}
+```
+
+* Sample Response
+
+```
+{
+  "uid": "28937837gyu82746hfg76",
+  "fullName": "Eark Mssien",
+  "email": "eark.mssien@hng.com",
+  "token": "xxxxxxxxxxxxxxxxxxxxx"
+}
+```
+#### User Login
+
+* Method - POST
+
+* URL - http://localhost:5555/api/v1/users/auth
+
+* Sample Request
+
+```
+{
+  "email": "eark.mssien@hng.com",
+  "password": "EarkMssien@20Covid"
+}
+```
 
 #### File structure
-+- falconmicroservices/ - name of the project folder.
-+--- config/ - main folder of the API.
-+--------- config.env - file used for common settings or variables.
-+--------- db.js - file used for db connectivity.
-+--- controllers/ - main folder of the API.
-+--------- files.js - file that houses getFiles(), getFile(), createFile(), updateFile(), deleteFile().
-+--- middleware/ - main folder of the API.
-+--------- async.js - handles asyncHandler().
-+--------- error.js - handles errorHandler().
-+--- models/ - main folder of the API.
-+--------- File.js - FileSchema.
-+--- node_modules/ - main folder of the API.
-+--- routes/ - main folder of the API.
-+--------- file.js - router.
-+--- utils/ - main folder of the API.
-+--------- errorResponse.js - ErrorResponse class.
-+--- .gitignore/ - main folder of the API.
-+--- LICENSE/ - main folder of the API.
-+--- index.js/ - main folder of the API.
-+--- README.md/ - main folder of the API.
+```
++- config/
++----- db.js - handles db connection
++----- multerConfig.js - multer middleware, handles file upload
++- controllers/
++----- files.js - handles file controller
++----- users.js - handles user controller
++- middleware/
++----- async.js - handles async in routes
++----- auth.js - auth middleware
++----- error.js - handles error response
++- models/
++----- File.js - file model
++----- Users.js - user model
++- node_modules/
++- routes/
++----- files.js - handles file controller
++----- users.js - handles user controller
++- utils/
++----- CustomError.js - handles custom error response
++----- response.js
++----- toXML.js
++----- validate.js
++----- verifyLink.js
++- .dockerignore
++- .gitignore
++- Dockerfile
++- README.md
++- docker-compose.yml
++- index.html
++- index.js
++- LICENSE
++- package-lock.json
++- package.json
++- swagger.json
++- wait-for.sh
+```
