@@ -18,7 +18,7 @@ async function getFileName(req) {
 
   if (!req.user.config.titleAsName) return (new Date().getTime())
 
-  if (await File.findOne({ title: req.body.title })) throw new CustomError("File title already exist")
+  if (await File.findOne({ title: req.body.title, userId: req.user.email })) throw new CustomError("File title already exist")
 
   return title.split(" ").join("-")
 }

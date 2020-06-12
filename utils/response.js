@@ -21,7 +21,7 @@ const response = (message, data, success, req) => {
     success: success == null ? true : success,
   };
 
-  if (req.user.responseType == "XML"){
+  if (req.user && req.user.responseType == "XML"){
     const options = {compact: true, ignoreComment: true, spaces: 4};
     return convert.json2xml(resp, options);
   }

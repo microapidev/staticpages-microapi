@@ -24,7 +24,9 @@ app.use("/uploads", express.static(path.join(__dirname, "./uploads/")));
 //Api routes
 app.use("/v1/files", authorize(), fileRoutes);
 app.use("/v1/users", userRoutes);
-app.use("/v1/documentation", userRoutes);
+app.get("/v1/documentation", (req, res) => {
+  res.json(swaggerDocument);
+});
 app.use("/v1/configure", updateConfig);
 
 // Home page
