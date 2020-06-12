@@ -1,6 +1,6 @@
 const jwt = require("jsonwebtoken");
-const User = require("../models/users.model");
-const CustomError = require("../helpers/CustomError");
+const User = require("./../models/users.model");
+const CustomError = require("./../utils/CustomError");
 
 module.exports.authorize = () => {
   return async (req, res, next) => {
@@ -9,10 +9,10 @@ module.exports.authorize = () => {
     const user = await User.findOne({ _id: decoded.id });
 
     //check if user exists and active
-    if (!user || !user.isActive) throw new CustomError("unauthorized user", 401);
+    if (!user) throw new CustomError("unauthorized user", 401);
 
     //save decoded toeknt to request object
-    req.user = decoded;
+    req.user = user;
 
     next();
   }

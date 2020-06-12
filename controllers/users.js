@@ -1,4 +1,4 @@
-const Users = require("./../models/users.model");
+const User = require("./../models/users.model");
 const bcrypt = require('bcrypt');
 const jwt = require('jsonwebtoken');
 const response = require("./../utils/response");
@@ -21,7 +21,7 @@ class UserContoller {
         // Check user email exist 
         if (await User.findOne({ email })) throw new CustomError("Email already exists");
 
-        let user = new Users(req.body)
+        let user = new User(req.body)
 
         const salt = await bcrypt.genSalt(10)
         const hash = await bcrypt.hash(user.password, salt)
@@ -38,7 +38,7 @@ class UserContoller {
             email: user.email,
         }
 
-        res.status(201).json(response("User created", data, true))
+        res.status(201).json(response("User created", data, true, req))
     }
 
 
@@ -60,7 +60,19 @@ class UserContoller {
             token
         };
 
-        res.status(200).json(response("User", data, true))
+        res.status(200).json(response("User", data, true, req))
+    }
+
+    async updateConfig(req, res) {
+        const user = await User.findByIdAndUpdate(
+            { _id: req.user._id },
+            { "$set": { config: req.body } },
+            { new: true, }
+        );
+
+        if (!user) throw new CustomError("user dosen't exist", 404);
+
+        res.status(200).send(response("All Files Found", user.config, true, req));
     }
 }
 
