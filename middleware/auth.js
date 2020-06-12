@@ -5,7 +5,7 @@ const jwtSecret = process.env.JWT_SECRET;
 
 module.exports.authorize = () => {
   return async (req, res, next) => {
-    const decoded = jwt.verify(req.headers.authorization, jwtSecret);
+    const decoded = jwt.verify(req.headers.Authorization, jwtSecret);
     const user = await User.findOne({ _id: decoded.id });
     //check if user exists and active
     if (!user) throw new CustomError("unauthorized user", 401);
