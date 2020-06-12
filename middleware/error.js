@@ -2,9 +2,12 @@ const CustomError = require("./../utils/CustomError");
 const response = require("./../utils/response");
 
 const errors = (error, req, res, next) => {
-  console.log(error.message);
   if (error instanceof CustomError) {
-    res.status(error.status).json(response(error.message, null, false));
+    res.status(error.status).send(response(error.message, null, false));
+  } else if (error.name == "CastError") {
+    res.status(400).send(response("Invalid id", null, false));
+  } else if (error.name == "JsonWebTokenError") {
+    res.status(400).send(response(error.message, null, false));
   } else if (error.name == "ValidationError") {
     res.status(400).send(response(error.message, null, false));
   } else if (error.name == "SyntaxError") {

@@ -79,9 +79,8 @@ class FileContoller {
           .send(response("File Not Found", null, false, req, res));
 
       const filename = file.fileURL.split("uploads/")[1];
-      try {
-        fs.unlinkSync(`uploads/${filename}`);
-      } catch { }
+
+      fs.unlinkSync(`uploads/${filename}`);
 
       await File.findOneAndUpdate(
         { _id: req.params.fileId, userId: req.user.email },
@@ -117,9 +116,7 @@ class FileContoller {
 
     const filename = file.fileURL.split("uploads/")[1];
 
-    try {
-      fs.unlinkSync(`uploads/${filename}`);
-    } catch { }
+    fs.unlinkSync(`uploads/${filename}`);
 
     await File.deleteOne({ _id: req.params.fileId, userId: req.user.email }, (err, file) => {
       if (err)
