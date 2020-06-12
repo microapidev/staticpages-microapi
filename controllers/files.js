@@ -5,14 +5,18 @@ const fs = require("fs");
 const validate = require("./../utils/validate");
 const verifyFileLink = require("./../utils/verifyLink");
 
+
+
 class FileContoller {
   // Add file
   async createFile(req, res) {
+
     if (req.body && req.file) {
       const check = validate({ title: req.body.title, fileURL: req.file.path });
 
       if (!check.error) {
         req.body["fileURL"] = req.file.path;
+        req.body["userID"] = req.user.email;
         let file = new File(req.body);
         file.save();
         return res
@@ -34,7 +38,7 @@ class FileContoller {
 
   // Get one file
   async getFile(req, res) {
-    const file = await File.findOne({ _id: req.params.fileId });
+    const file = await File.findOne({ _id: req.params.fileId, userId: req.user.email });
     if (!file) throw new CustomError("File Not Found", 404);
 
     res
@@ -67,7 +71,7 @@ class FileContoller {
         .status(406)
         .send(response(check.error.details[0].message, null, false, req, res));
 
-    await File.findOne({ _id: req.params.fileId }, async (err, file) => {
+    await File.findOne({ _id: req.params.fileId, userId: req.user.email }, async (err, file) => {
       if (err) throw new CustomError("Error occured while retriving files");
       if (!file)
         return res
@@ -75,9 +79,12 @@ class FileContoller {
           .send(response("File Not Found", null, false, req, res));
 
       const filename = file.fileURL.split("uploads/")[1];
-      fs.unlinkSync(`uploads/${filename}`);
+      try {
+        fs.unlinkSync(`uploads/${filename}`);
+      } catch { }
+
       await File.findOneAndUpdate(
-        { _id: req.params.fileId },
+        { _id: req.params.fileId, userId: req.user.email },
         req.body,
         { new: true },
         (err, file) => {
@@ -103,17 +110,20 @@ class FileContoller {
     });
   }
 
-  // Delte one file
+  // Delete one file
   async deleteFile(req, res) {
-    const file = await File.findOne({ _id: req.params.fileId });
+    const file = await File.findOne({ _id: req.params.fileId, userId: req.user.email })
     if (!file) throw new CustomError("File Not Found", 404);
 
     const filename = file.fileURL.split("uploads/")[1];
 
-    fs.unlinkSync(`uploads/${filename}`);
+    try {
+      fs.unlinkSync(`uploads/${filename}`);
+    } catch { }
 
-    await File.deleteOne({ _id: req.params.fileId }, (err, file) => {
-      if (err) throw new CustomError("Error occured while deleting file");
+    await File.deleteOne({ _id: req.params.fileId, userId: req.user.email }, (err, file) => {
+      if (err)
+        throw new CustomError("Error occured while deleting file");
       if (!file)
         return res
           .status(404)

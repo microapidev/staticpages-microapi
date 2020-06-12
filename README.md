@@ -12,7 +12,8 @@ A dockerized micro-service for adding, updating, retrieving and deleting files
 
 * Method - POST
 
-* URL - http://localhost:5555/api/v1/files/
+* URL - http://localhost:5555/v1/files/
+
 
 * Sample Request
 
@@ -36,7 +37,7 @@ A dockerized micro-service for adding, updating, retrieving and deleting files
 
 * Method - GET
 
-* URL - http://localhost:5555/api/v1/files/
+* URL - http://localhost:5555/v1/files/
 
 * Sample Response
 
@@ -60,10 +61,6 @@ A dockerized micro-service for adding, updating, retrieving and deleting files
         {
             "id": "5e6288bc8c7fec6308a1d496",
             "file": "s3://falcon-bucket/files/john.gif"
-        },
-        {
-            "id": "5e6288bc8c7fec6308a1d495",
-            "file": "s3://falcon-bucket/files/doe.jpeg"
         }
     ]
 }
@@ -73,7 +70,7 @@ A dockerized micro-service for adding, updating, retrieving and deleting files
 
 * Method - GET
 
-* URL - http://localhost:5555/api/v1/files/:fileId
+* URL - http://localhost:5555/v1/files/:fileId
 
 * Sample Response
 
@@ -92,7 +89,7 @@ A dockerized micro-service for adding, updating, retrieving and deleting files
 
 * Method - PUT
 
-* URL - http://localhost:5555/api/v1/files/:fileId
+* URL - http://localhost:5555/v1/files/:fileId
 
 * HEADER
 
@@ -119,7 +116,7 @@ A dockerized micro-service for adding, updating, retrieving and deleting files
 
 * Method - DELETE
 
-* URL - http://localhost:5555/api/v1/files/:fileId
+* URL - http://localhost:5555/v1/files/:fileId
 
 * HEADER
 
@@ -146,23 +143,23 @@ A dockerized micro-service for adding, updating, retrieving and deleting files
 #### Get all Files - Paging
 
 #### File structure
-+- falconmicroservices/ - name of the project folder.
-+--- config/ - main folder of the API.
-+--------- config.env - file used for common settings or variables.
-+--------- db.js - file used for db connectivity.
-+--- controllers/ - main folder of the API.
-+--------- files.js - file that houses getFiles(), getFile(), createFile(), updateFile(), deleteFile().
-+--- middleware/ - main folder of the API.
-+--------- async.js - handles asyncHandler().
-+--------- error.js - handles errorHandler().
-+--- models/ - main folder of the API.
-+--------- File.js - FileSchema.
-+--- node_modules/ - main folder of the API.
-+--- routes/ - main folder of the API.
-+--------- file.js - router.
-+--- utils/ - main folder of the API.
-+--------- errorResponse.js - ErrorResponse class.
-+--- .gitignore/ - main folder of the API.
-+--- LICENSE/ - main folder of the API.
-+--- index.js/ - main folder of the API.
-+--- README.md/ - main folder of the API.
+```
++- config/
++----- config.env
++----- db.js
++- controllers/
++----- files.js
++- middleware/
++----- error.js
++- models/
++----- File.js
++- node_modules/
++- routes/
++----- file.js
++- utils/
++----- errorResponse.js
++- .gitignore/
++- LICENSE/
++- index.js/
++- README.md/
+```
