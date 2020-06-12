@@ -3,6 +3,7 @@ const bcrypt = require('bcrypt');
 const jwt = require('jsonwebtoken');
 const response = require("./../utils/response");
 const CustomError = require("./../utils/CustomError");
+const jwtSecret = process.env.JWT_SECRET;
 // const validate = require("./../utils/validate");
 
 /**
@@ -29,7 +30,7 @@ class UserContoller {
 
         user.save(user)
 
-        const token = jwt.sign({ id: user._id }, process.env.JWT_SECRET, { expiresIn: 36000 })
+        const token = jwt.sign({ id: user._id }, jwtSecret, { expiresIn: 36000 })
 
         const data = {
             token,
@@ -51,7 +52,7 @@ class UserContoller {
         const isCorrect = await bcrypt.compare(req.body.password, user.password)
         if (!isCorrect) throw new CustomError("Incorrect email or password");
 
-        const token = jwt.sign({ id: user._id }, process.env.JWT_SECRET, { expiresIn: 36000 })
+        const token = jwt.sign({ id: user._id }, jwtSecret, { expiresIn: 36000 })
 
         const data = {
             uid: user._id,

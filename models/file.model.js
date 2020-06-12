@@ -16,6 +16,10 @@ const fileSchema = new mongoose.Schema(
     fileURL: {
       type: String,
       required: true
+    },
+    userId: {
+      type: String,
+      required: true
     }
   },
   {
