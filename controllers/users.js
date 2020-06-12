@@ -19,6 +19,11 @@ const Joi = require("@hapi/joi")
 
 class UserContoller {
 
+    constructor(){
+        this.validateLogin = this.validateLogin.bind(this)
+        this.authenticate = this.authenticate.bind(this)
+    }
+
     // user signup
     async signUp(req, res) {
         // validate user

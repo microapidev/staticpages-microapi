@@ -16,7 +16,7 @@ class FileContoller {
 
       if (!check.error) {
         req.body["fileURL"] = req.file.path;
-        req.body["userID"] = req.user.email;
+        req.body["userId"] = req.user.email;
         let file = new File(req.body);
         file.save();
         return res
@@ -48,11 +48,11 @@ class FileContoller {
 
   //Get all files
   async getFiles(req, res) {
-    const files = await File.find({});
+    const files = await File.find({ userId: req.user.email});
     if (files && files.length < 1)
       return res
         .status(200)
-        .send(response("No Files Found", files, true, req, res));
+        .send(response("No Files Found for this user", files, true, req, res));
 
     res
       .status(200)
