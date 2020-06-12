@@ -8,6 +8,7 @@ const jwt = require('jsonwebtoken');
 const response = require("./../utils/response");
 const CustomError = require("./../utils/CustomError");
 const jwtSecret = process.env.JWT_SECRET;
+const Joi = require("@hapi/joi")
 // const validate = require("./../utils/validate");
 
 /**
@@ -21,6 +22,8 @@ class UserContoller {
     // user signup
     async signUp(req, res) {
         // validate user
+
+        console.log(req.body)
         const {
             error
         } = validateUser(req.body);
