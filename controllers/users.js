@@ -1,4 +1,8 @@
-const User = require("./../models/users.model");
+const {
+    User,
+    validateUser
+} = require("./../models/users.model");
+
 const bcrypt = require('bcrypt');
 const jwt = require('jsonwebtoken');
 const response = require("./../utils/response");
@@ -16,11 +20,18 @@ class UserContoller {
 
     // user signup
     async signUp(req, res) {
-        const { fullName, email, password } = req.body;
         // validate user
-        if (!fullName || !email || !password) throw new CustomError('Please fill in the required field')
+        const {
+            error
+        } = validateUser(req.body);
+        if (error) throw new CustomError(error.details[0].message)
+        const {
+            email
+        } = req.body;
         // Check user email exist 
-        if (await User.findOne({ email })) throw new CustomError("Email already exists");
+        if (await User.findOne({
+                email
+            })) throw new CustomError("Email already exists");
 
         let user = new User(req.body)
 
@@ -30,7 +41,11 @@ class UserContoller {
 
         user.save(user)
 
-        const token = jwt.sign({ id: user._id }, jwtSecret, { expiresIn: 36000 })
+        const token = jwt.sign({
+            id: user._id
+        }, jwtSecret, {
+            expiresIn: 36000
+        })
 
         const data = {
             token,
@@ -44,15 +59,23 @@ class UserContoller {
 
 
     async authenticate(req, res) {
-        if (!req.body.email) throw new CustomError("Email is required");
-        if (!req.body.password) throw new CustomError("Password is required");
+        const {
+            error
+        } = this.validateLogin(req.body);
+        if (error) throw new CustomError(error.details[0].message);
 
-        const user = await User.findOne({ email: req.body.email });
+        const user = await User.findOne({
+            email: req.body.email
+        });
         if (!user) throw new CustomError("Incorrect email or password");
         const isCorrect = await bcrypt.compare(req.body.password, user.password)
         if (!isCorrect) throw new CustomError("Incorrect email or password");
 
-        const token = jwt.sign({ id: user._id }, jwtSecret, { expiresIn: 36000 })
+        const token = jwt.sign({
+            id: user._id
+        }, jwtSecret, {
+            expiresIn: 36000
+        })
 
         const data = {
             uid: user._id,
@@ -65,15 +88,28 @@ class UserContoller {
     }
 
     async updateConfig(req, res) {
-        const user = await User.findByIdAndUpdate(
-            { _id: req.user._id },
-            { "$set": { config: req.body } },
-            { new: true, }
-        );
+        const user = await User.findByIdAndUpdate({
+            _id: req.user._id
+        }, {
+            "$set": {
+                config: req.body
+            }
+        }, {
+            new: true,
+        });
 
         if (!user) throw new CustomError("user dosen't exist", 404);
 
         res.status(200).send(response("All Files Found", user.config, true, req));
+    }
+
+    validateLogin(req) {
+        const schema = Joi.object({
+            email: Joi.string().required().email(),
+            password: Joi.string().required()
+        });
+
+        return schema.validate(req);
     }
 }
 
