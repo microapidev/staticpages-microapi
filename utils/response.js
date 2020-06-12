@@ -1,3 +1,5 @@
+const convert = require('xml-js');
+
 /**
  * @param {string} message 
  * Response message
@@ -12,12 +14,18 @@
  * res.status(200).json(response("File added successfuly", {file: "file.png"}, true))
  */
 
-const response = (message, data, success) => {
-  return {
+const response = (message, data, success, req) => {
+  const resp = {
     message: message || null,
     data: data || null,
     success: success == null ? true : success,
   };
+
+  if (req.user.responseType == "XML"){
+    const options = {compact: true, ignoreComment: true, spaces: 4};
+    return convert.json2xml(resp, options);
+  }
+  return resp
 }
 
 

@@ -12,7 +12,8 @@ const fileRoutes = require("./routes/files");
 const userRoutes = require("./routes/users");
 const errorMiddleware = require("./middleware/error");
 const initDB = require("./config/db");
-const auth = require("./middleware/auth")
+const { authorize } = require("./middleware/auth");
+const { updateConfig } = require("./controllers/users");
 
 app.use(cors());
 app.use(morgan("dev"));
@@ -21,8 +22,10 @@ app.use(express.json());
 app.use("/uploads", express.static(path.join(__dirname, "./uploads/")));
 
 //Api routes
-app.use("/api/v1/files", auth(), fileRoutes);
-app.use("/api/v1/users", userRoutes);
+app.use("/v1/files", authorize(), fileRoutes);
+app.use("/v1/users", userRoutes);
+app.use("/v1/documentation", userRoutes);
+app.use("/v1/configure", updateConfig);
 
 // Home page
 app.use('/', swaggerUi.serve, swaggerUi.setup(swaggerDocument));
