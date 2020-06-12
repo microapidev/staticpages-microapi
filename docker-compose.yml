@@ -10,7 +10,7 @@ services:
     environment:
       - MONGO_URI=$MONGO_URI
     ports:
-      - "5556:5555"
+      - "5555:5555"
     # volumes:
     #   - .:/home/node/app
     #   - node_modules:/home/node/app/node_modules
