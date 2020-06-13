@@ -33,15 +33,18 @@ class UserContoller {
             error
         } = validateUser(req.body);
         if (error) throw new CustomError(error.details[0].message)
-        const {
-            email
+        let {
+            email,
+            fullName,
+            password
         } = req.body;
+        fullName = fullName.trim()
         // Check user email exist 
         if (await User.findOne({
                 email
             })) throw new CustomError("Email already exists");
 
-        let user = new User(req.body)
+        let user = new User({ email, fullName, password })
 
         const salt = await bcrypt.genSalt(10)
         const hash = await bcrypt.hash(user.password, salt)
