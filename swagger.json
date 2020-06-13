@@ -15,16 +15,16 @@
   },
   "tags": [
     {
+      "name": "configure",
+      "description": "Configuring user preferences"
+    },
+    {
       "name": "user",
       "description": "Everything about user and authentication"
     },
     {
       "name": "file",
       "description": "Everything about file manager"
-    },
-    {
-      "name": "configure",
-      "description": "Configuring user preferences"
     }
   ],
   "schemes": [
@@ -100,25 +100,28 @@
         ],
         "parameters": [
           {
-            "in": "formData",
-            "name": "fullName",
-            "type": "string",
-            "required": true,
-            "description": "Full name of user"
-          },
-          {
-            "in": "formData",
-            "name": "email",
-            "type": "string",
-            "description": "Email address of user",
-            "required": true
-          },
-          {
-            "in": "formData",
-            "name": "password",
-            "type": "string",
-            "description": "Password of user",
-            "required": true
+            "in": "body",
+            "name": "Sign up",
+            "description": "Sign up request",
+            "schema": {
+              "type": "object",
+              "required": [
+                "fullName",
+                "email",
+                "password"
+              ],
+              "properties": {
+                "fullName": {
+                  "type": "string"
+                },
+                "email": {
+                  "type": "string"
+                },
+                "password": {
+                  "type": "string"
+                }
+              }
+            }
           }
         ],
         "responses": {
@@ -131,7 +134,7 @@
         }
       }
     },
-    "/v1/users/auth": {
+    "/v1/users/signin": {
       "post": {
         "tags": [
           "user"
@@ -148,18 +151,24 @@
         ],
         "parameters": [
           {
-            "in": "formData",
-            "name": "email",
-            "type": "string",
-            "description": "Email address of user",
-            "required": true
-          },
-          {
-            "in": "formData",
-            "name": "password",
-            "type": "string",
-            "description": "Password of user",
-            "required": true
+            "in": "body",
+            "name": "Authenticate",
+            "description": "Authenticate user",
+            "schema": {
+              "type": "object",
+              "required": [
+                "email",
+                "password"
+              ],
+              "properties": {
+                "email": {
+                  "type": "string"
+                },
+                "password": {
+                  "type": "string"
+                }
+              }
+            }
           }
         ],
         "responses": {
