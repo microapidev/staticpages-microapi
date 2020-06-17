@@ -1,245 +1,170 @@
-# file-manager (TEAM-FALCON-Backend)
+# Team_Titans_BackEnd_Js
 
-> A dockerized micro-service for adding, updating, retrieving and deleting files
+To Contribute...
 
-### Quick Start
+1. Create a personal fork of this repo on your Github.
+
+2. Clone the fork on your local machine (pc) .
+	using "git clone url of the repo."
+ Once you have cloned your remote on Github is called origin.
+
+3. On your local machine (pc) inside the cloned 	  project, add the origin repository as a remote called upstream.
+i.e git remote add upstream url of the repo.
+
+4. Create a new branch to work on. Branch from the master branch. It is recommended that you make a new branch for every new feature you work on and work from there.
+You can use "git checkout -b name of new brach" shorthand to create a new brach and switch to it .
+
+5. Push your branch to your fork Github, i.e the remote origin.
+
+6. From your fork open a pull request in the correct branch. Target the project's master branch.
+
+7. Be sure to always pull upstream changes into your local repository to keep updates of the main repo.
+
+"git pull upstream branch_name" which is the main branch (master).
+  
+
+  These are the set of instructions from Mark.
+
+  Try and always:
+8. Comment your codes properly.
+
+9. Follow the code style of the project including indentation.
+
+GOOD LUCK... 
+
+
+## Getting started After Cloninig
+
+
+This is a basic API skeleton written in JavaScript ES2015. Very useful to building a RESTful web APIs for your front-end platforms like Android, iOS or JavaScript frameworks (Angular, Reactjs, etc).
+
+This project will run on **NodeJs** using **MongoDB** as database. I had tried to maintain the code structure easy as any beginner can also adopt the flow and start building an API. Project is open for suggestions, Bug reports and pull requests. 
+
+## Features
+
+-   Basic Authentication (Register/Login with hashed password)
+-   Account confirmation with 4 (Changeable) digit OTP.
+-   Email helper ready just import and use.
+-   JWT Tokens, make requests with a token after login with `Authorization` header with value `Bearer yourToken` where `yourToken` will be returned in Login response.
+-   Pre-defined response structures with proper status codes.
+-   Included CORS.
+-    **Book** example with **CRUD** operations.
+-   Validations added.
+-   Included API collection for Postman.
+-   Light-weight project.
+-   Test cases with [Mocha](https://mochajs.org/) and [Chai](https://www.chaijs.com/).
+-   Code coverage with [Istanbuljs (nyc)](https://istanbul.js.org/).
+-   Included CI (Continuous Integration) with [Travis CI](https://travis-ci.org).
+-   Linting with [Eslint](https://eslint.org/).
+
+## Software Requirements
+
+-   Node.js **8+**
+-   MongoDB **3.6+** (Recommended **4+**)
+
+## Getting started with the Server
+
+### Install npm dependencies after installing (Git or manual download)
 
 ```bash
-# Install dependencies
-npm i
+npm install
+```
 
-# Install dev-dependencies
-npm i -D
+### Setting up environments
 
-# Serve on localhost:5555 (development)
+1.  You will find a file named `.env.example` on root directory of project.
+2.  Create a new file by copying and pasting the file and then renaming it to just `.env`
+    ```bash
+    cp .env.example .env
+    ```
+3.  The file `.env` is already ignored, so you never commit your credentials.
+4.  Change the values of the file to your environment. Helpful comments added to `.env.example` file to understand the constants.
+## Project  structure
+```sh
+.
+├── app.js
+├── package.json
+├── bin
+│   └── www
+├── controllers
+│   ├── AuthController.js
+│   └── SmsController.js
+├── models
+│   ├── SmsModel.js
+│   └── UserModel.js
+├── routes
+│   ├── api.js
+│   ├── auth.js
+│   └── sms.js
+├── middlewares
+│   ├── jwt.js
+├── helpers
+│   ├── apiResponse.js
+│   ├── constants.js
+│   ├── mailer.js
+│   └── utility.js
+├── test
+│   ├── testConfig.js
+│   ├── auth.js
+│  
+└── public
+    ├── index.html
+    └── stylesheets
+        └── style.css
+```
+## How to run
+
+### Running  API server locally
+
+```bash
 npm run dev
-
-# Serve on localhost:5555 (production)
-npm start
-
-# Test Routes
-npm run test
 ```
 
-### Testing
+You will know server is running by checking the output of the command `npm run dev`
 
-### Files
+```bash
+Connected to mongodb:YOUR_DB_CONNECTION_STRING
+App is running ...
 
-| Routes&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; | Description                                                        |
-| -------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------ |
-| POST  ::  /v1/files                                            | Create a file                         |
-| GET   ::  /v1/files                                            | Get all files                         |
-| GET   ::  /v1/files/:fileId                                    | Get a file                            |
-| UPDATE::  /v1/files/::fileId                                   | Update a file                         |
-| DELETE::  /v1/files/:fileId                                    | Delete a file                         |
-
-#### Create a File
-
-* Method - POST
-
-* URL - http://localhost:5555/v1/files
-
-* Sample Request
-
+Press CTRL + C to stop the process.
 ```
-Headers 
-Body: form-data
-    Key - file(file)
-    Value - select file
-```
+**Note:**  `YOUR_DB_CONNECTION_STRING` will be your MongoDB connection string.
 
-* Sample Response
+### Creating new models
 
-```
-{
-    "status": true,
-    "message": "File Uploaded",
-    "data": null
-}
+If you need to add more models to the project just create a new file in `/models/` and use them in the controllers.
+
+### Creating new routes
+
+If you need to add more routes to the project just create a new file in `/routes/` and add it in `/routes/api.js` it will be loaded dynamically.
+
+### Creating new controllers
+
+If you need to add more controllers to the project just create a new file in `/controllers/` and use them in the routes.
+
+## Tests
+
+### Running  Test Cases
+
+```bash
+npm test
 ```
 
-#### Get all Files
+You can set custom command for test at `package.json` file inside `scripts` property. You can also change timeout for each assertion with `--timeout` parameter of mocha command.
 
-* Method - GET
+### Creating new tests
 
-* URL - http://localhost:5555/v1/files
+If you need to add more test cases to the project just create a new file in `/test/` and run the command.
 
-* Sample Response
+## ESLint
 
-```
-{
-    "status": true,
-    "message": "Files Found",
-    "data": [
-        {
-            "id": "5e6288bc8c7fec6308a1d499",
-            "file": "https://res.cloudinary.com/major-stark/image/upload/v1591884570/files/mark.png"
-        },
-        {
-            "id": "5e6288bc8c7fec6308a1d498",
-            "file": "https://res.cloudinary.com/major-stark/image/upload/v1591884570/files/essien.jpeg"
-        },
-        {
-            "id": "5e6288bc8c7fec6308a1d497",
-            "file": "https://res.cloudinary.com/major-stark/image/upload/v1591884570/files/saucecode.svg"
-        },
-        {
-            "id": "5e6288bc8c7fec6308a1d496",
-            "file": "https://res.cloudinary.com/major-stark/image/upload/v1591884570/files/hng.mp4"
-        },
-        {
-            "id": "5e6288bc8c7fec6308a1d495",
-            "file": "https://res.cloudinary.com/major-stark/image/upload/v1591884570/files/doe.gif"
-        }
-    ]
-}
+### Running  Eslint
+
+```bash
+npm run lint
 ```
 
-#### Get a File
+You can set custom rules for eslint in `.eslintrc.json` file, Added at project root.
 
-* Method - GET
 
-* URL - http://localhost:5555/v1/files/:fileId
 
-* Sample Response
-
-```
-{
-    "status": true,
-    "message": "File Found",
-    "data": {
-        "id": "5e6288bc8c7fec6308a1d499",
-        "file": "https://res.cloudinary.com/major-stark/image/upload/v1591884570/files/mark.png"
-    }
-}
-```
-
-#### Update a File
-
-* Method - PUT
-
-* URL - http://localhost:5555/v1/files/:fileId
-
-* Sample Request
-
-```
-Headers 
-Body: form-data
-    Key - file(file)
-    Value - select file
-```
-
-* Sample Response
-
-```
-{
-    "status": true,
-    "message": "File Updated",
-    "data": null
-}
-```
-
-#### Delete a File
-
-* Method - DELETE
-
-* URL - http://localhost:5555/api/v1/files/:fileId
-
-* Sample Response
-
-```
-{
-    "status": true,
-    "message": "File Deleted",
-    "data": null
-}
-```
-
-### Testing
-
-### Users
-
-| Routes&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; | Description                                                        |
-| -------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------ |
-| POST :: /v1/users/signup                                         | User Signup                                |
-| POST :: /v1/users/auth                                           | User Login                                 |
-
-#### User Signup
-
-* Method - POST
-
-* URL - http://localhost:5555/api/v1/users/signup
-
-* Sample Request
-
-```
-{
-  "fullName": "Eark Mssien",
-  "email": "eark.mssien@hng.com",
-  "password": "EarkMssien@20Covid"
-}
-```
-
-* Sample Response
-
-```
-{
-  "uid": "28937837gyu82746hfg76",
-  "fullName": "Eark Mssien",
-  "email": "eark.mssien@hng.com",
-  "token": "xxxxxxxxxxxxxxxxxxxxx"
-}
-```
-#### User Login
-
-* Method - POST
-
-* URL - http://localhost:5555/api/v1/users/auth
-
-* Sample Request
-
-```
-{
-  "email": "eark.mssien@hng.com",
-  "password": "EarkMssien@20Covid"
-}
-```
-
-#### File structure
-```
-+- config/
-+----- db.js - handles db connection
-+----- multerConfig.js - multer middleware, handles file upload
-+- controllers/
-+----- files.js - handles file controller
-+----- users.js - handles user controller
-+- middleware/
-+----- async.js - handles async in routes
-+----- auth.js - auth middleware
-+----- error.js - handles error response
-+- models/
-+----- File.js - file model
-+----- Users.js - user model
-+- node_modules/
-+- routes/
-+----- files.js - handles file controller
-+----- users.js - handles user controller
-+- utils/
-+----- CustomError.js - handles custom error response
-+----- response.js
-+----- toXML.js
-+----- validate.js
-+----- verifyLink.js
-+- .dockerignore
-+- .gitignore
-+- Dockerfile
-+- README.md
-+- docker-compose.yml
-+- index.html
-+- index.js
-+- LICENSE
-+- package-lock.json
-+- package.json
-+- swagger.json
-+- wait-for.sh
-```
