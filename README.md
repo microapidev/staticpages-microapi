@@ -1,4 +1,4 @@
-# Team_Titans_BackEnd_Js
+# Static Pages API
 
 To Contribute...
 
@@ -21,7 +21,7 @@ You can use "git checkout -b name of new brach" shorthand to create a new brach 
 7. Be sure to always pull upstream changes into your local repository to keep updates of the main repo.
 
 "git pull upstream branch_name" which is the main branch (master).
-  
+
 
   These are the set of instructions from Mark.
 
@@ -30,7 +30,7 @@ You can use "git checkout -b name of new brach" shorthand to create a new brach 
 
 9. Follow the code style of the project including indentation.
 
-GOOD LUCK... 
+GOOD LUCK...
 
 
 ## Getting started After Cloninig
@@ -38,17 +38,15 @@ GOOD LUCK...
 
 This is a basic API skeleton written in JavaScript ES2015. Very useful to building a RESTful web APIs for your front-end platforms like Android, iOS or JavaScript frameworks (Angular, Reactjs, etc).
 
-This project will run on **NodeJs** using **MongoDB** as database. I had tried to maintain the code structure easy as any beginner can also adopt the flow and start building an API. Project is open for suggestions, Bug reports and pull requests. 
+This project will run on **NodeJs** using **MongoDB** as database. I had tried to maintain the code structure easy as any beginner can also adopt the flow and start building an API. Project is open for suggestions, Bug reports and pull requests.
 
 ## Features
 
 -   Basic Authentication (Register/Login with hashed password)
--   Account confirmation with 4 (Changeable) digit OTP.
 -   Email helper ready just import and use.
 -   JWT Tokens, make requests with a token after login with `Authorization` header with value `Bearer yourToken` where `yourToken` will be returned in Login response.
 -   Pre-defined response structures with proper status codes.
 -   Included CORS.
--    **Book** example with **CRUD** operations.
 -   Validations added.
 -   Included API collection for Postman.
 -   Light-weight project.
@@ -60,7 +58,7 @@ This project will run on **NodeJs** using **MongoDB** as database. I had tried t
 ## Software Requirements
 
 -   Node.js **8+**
--   MongoDB **3.6+** (Recommended **4+**)
+-   MongoDB  **4+**
 
 ## Getting started with the Server
 
@@ -87,26 +85,17 @@ npm install
 ├── bin
 │   └── www
 ├── controllers
-│   ├── AuthController.js
-│   └── SmsController.js
 ├── models
-│   ├── SmsModel.js
-│   └── UserModel.js
 ├── routes
 │   ├── api.js
-│   ├── auth.js
-│   └── sms.js
 ├── middlewares
 │   ├── jwt.js
 ├── helpers
 │   ├── apiResponse.js
-│   ├── constants.js
-│   ├── mailer.js
-│   └── utility.js
 ├── test
 │   ├── testConfig.js
 │   ├── auth.js
-│  
+│
 └── public
     ├── index.html
     └── stylesheets
