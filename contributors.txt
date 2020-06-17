@@ -1,4 +1,3 @@
-
 Name: Osinachi Chukwujama. Slack username: Osinachi
 Name: Sosu Alfred. Slack username: sosualfred
 Name: Miracle Abaye King. Slack username: Micode
@@ -17,4 +16,4 @@ Name: Olutoke Damola.   Slack username: adedamolaOlutoke
 Name: Marvellous Aigbe. Slack username: marvellous
 Name: Francis Uthman Kolapo. Slack Username: @iamfrankola
 Name: Osunlana Jesutofunmi. Slack username: @speak
-
+Name: Isaiah Akojenu. Slack username: skelo94
