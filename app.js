@@ -5,6 +5,7 @@ const logger = require("morgan");
 require("dotenv").config();
 const apiResponse = require("./helpers/apiResponse");
 const apiRouter = require("./routes/api");
+const mdtohtmlRouter = require("./routes/mdtohtml");
 
 const cors = require("cors");
 
@@ -43,11 +44,12 @@ app.use(cors());
 
 //Route Prefixes
 
-app.use("/api/", apiRouter);
+app.use("/api", apiRouter);
+app.use("/api/v1/mdtohtml", mdtohtmlRouter);
 
 // throw 404 if URL not found
 app.all("*", function (req, res) {
-	return apiResponse.notFoundResponse(res, "Page not found");
+	return apiResponse.notFoundResponse(res, "URL not found");
 });
 
 app.use((err, req, res) => {
