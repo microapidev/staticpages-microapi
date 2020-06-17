@@ -1,6 +1,20 @@
-1. Name: Osinachi Chukwujama. Slack username: Osinachi
-2. Name: Sosu Alfred. Slack username: sosualfred
-3. Name: Miracle Abaye King. Slack username: Micode
-4. Name: Yahaya Oyinkansola. Slack username: Kansoldev
-5. Name: George Owoicho.   Slack username: @georgeowi
-6. Francis Uthman Kolapo. Slack Username: @iamfrankola
+Name: Osinachi Chukwujama. Slack username: Osinachi
+Name: Sosu Alfred. Slack username: sosualfred
+Name: Miracle Abaye King. Slack username: Micode
+Name: Yahaya Oyinkansola. Slack username: Kansoldev
+Name: George Owoicho.   Slack username: @georgeowi
+Name: Samuel Joseph. Slack username: @Coolheaded
+Name: Ibitoye Olatunde. Slack username: @IbitoyeO
+Name: Bobade Kehinde. Slack username: Kenny...
+Name: Charles Okafor. Slack username: CharlesK
+Name: Fisayo Adesomoju. Slack username: @Fisayo
+Name: Etoro Umoren. Slack Username: Itty
+Name: Tonye Nation. Slack username: @T.Nation
+Name: Babatunde Adedolapo.   Slack username: @dolapobabs
+Name: Jamilu Salisu   Slack username: @Jamilusalis
+Name: Olutoke Damola.   Slack username: adedamolaOlutoke
+Name: Marvellous Aigbe. Slack username: marvellous
+Name: Francis Uthman Kolapo. Slack Username: @iamfrankola
+Name: Osunlana Jesutofunmi. Slack username: @speak
+Name: Isaiah Akojenu. Slack username: skelo94
+Name: Ifebhor Odion Nonse. Slack username: @nonseodion
