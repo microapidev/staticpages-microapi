@@ -10,11 +10,12 @@ exports.convert = (req, res, next) => {
 		}
 		const converter = new showdown.Converter();
 		const md = converter.makeHtml(string);
-		apiRes.successResponseWithData(res, "successfully converted html to md", md)
+		apiRes.successResponseWithData(
+			res,
+			"successfully converted html to md",
+			md
+		);
 	} catch (error) {
 		next(error);
 	}
 };
-
-
-

@@ -4,7 +4,9 @@
   "private": true,
   "scripts": {
     "start": "node ./bin/www",
-    "dev": "nodemon ./bin/www",
+		"dev": "nodemon ./bin/www",
+		"build_json_from_yml": "node ./bin/jsonfromyml.js",
+		"serve_json": "http-server build/test.json -p 8000",
     "test": "nyc _mocha --timeout 10000 --exit --report lcovonly -- -R spec",
     "lint": "eslint --fix --config .eslintrc.json \"**/*.js\""
   },
@@ -18,6 +20,9 @@
     "express": "~4.16.0",
     "express-jwt": "^5.3.1",
     "express-validator": "^6.2.0",
+    "glob": "^7.1.6",
+    "http-server": "^0.12.3",
+    "js-yaml": "^3.14.0",
     "jsonwebtoken": "^8.5.1",
     "mocha-lcov-reporter": "^1.3.0",
     "moment": "^2.24.0",
