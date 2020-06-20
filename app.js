@@ -19,7 +19,9 @@ mongoose
 		//don't show the log when it is test
 		if (process.env.NODE_ENV !== "test") {
 			console.log("Connected to %s", MONGODB_URL);
-			console.log(`App is running on port http://localhost:${process.env.PORT} `);
+			console.log(
+				`App is running on port http://localhost:${process.env.PORT} `
+			);
 		}
 	})
 	.catch((err) => {
@@ -38,6 +40,7 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, "public")));
+
 app.use(
 	fileUpload({
 		limits: { fileSize: 10 * 1024 * 1024 },
